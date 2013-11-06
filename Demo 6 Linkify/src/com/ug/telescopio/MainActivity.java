@@ -90,7 +90,7 @@ public class MainActivity extends Activity  {
 		
 		ArrayAdapter<String> namesAdapter = new ArrayAdapter<String>(this, 
 																     android.R.layout.simple_spinner_dropdown_item, 
-																     names);
+																     getResources().getStringArray(R.array.prueba));
 		spinner.setAdapter(namesAdapter);
 		
 		CheckBox checkbox = (CheckBox)inputControls.findViewById(R.id.checkBox1);
