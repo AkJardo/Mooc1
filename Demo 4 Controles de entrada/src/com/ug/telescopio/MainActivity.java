@@ -34,6 +34,7 @@ public class MainActivity extends Activity  {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		
+		int i=0;
 		btnSearch = (Button)findViewById(R.id.btnSearch);
 		btnOpenActivity = (Button)findViewById(R.id.btnOpenActivity);
 		btnSearch.setOnClickListener(new ButtonListener());
