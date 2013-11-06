@@ -13,4 +13,5 @@
     <string name="txt_radio_0">Opción A</string>
     <string name="txt_radio_1">Opción B</string>
     <string name="txt_radio_2">Opción C</string>
+    <string name="textview">asd</string>
 </resources>
