@@ -8,5 +8,19 @@
     <string name="textview">Nuestras tiendas</string>
     <string name="txtShopName">Nombre de la tienda</string>
     <string name="txtShopDetail">Detalle</string>
+    <string name="txtNombre">Nombre</string>
+    <string name="txtActividad">Actividad</string>
+    <string name="txtTelefono">111111111</string>
+    <string name="title_activity_detail">Información</string>
+    <string name="lblTelefono">Telf:</string>
+    <string name="lblDireccion">Dirección:</string>
+    <string name="lblHorarios">Horario:</string>
+    <string name="txtDireccion">direccion</string>
+    <string name="lblWeb">Web:</string>
+    <string name="lblCorreo">Correo:</string>
+    <string name="txtWeb">Web</string>
+    <string name="txtCorreo">Email</string>
+    <string name="txtHorario">Horario</string>
 
 </resources>
+

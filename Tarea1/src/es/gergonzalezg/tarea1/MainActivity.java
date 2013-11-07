@@ -7,6 +7,7 @@ import java.util.List;
 import android.os.Bundle;
 import android.app.Activity;
 import android.app.ListActivity;
+import android.content.Intent;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -44,7 +45,12 @@ public class MainActivity extends ListActivity implements OnItemClickListener {
 			
 			tienda.put("nombre", tiendas.get(i)[0].toString());
 			tienda.put("actividad", tiendas.get(i)[1].toString());
-			tienda.put("ID", tiendas.get(i)[2].toString());
+			tienda.put("telefono", tiendas.get(i)[2].toString());
+			tienda.put("direccion", tiendas.get(i)[3].toString());
+			tienda.put("horario", tiendas.get(i)[4].toString());
+			tienda.put("website", tiendas.get(i)[5].toString());
+			tienda.put("email", tiendas.get(i)[6].toString());
+			tienda.put("ID", tiendas.get(i)[7].toString());
 			
 			datosTiendas.add(tienda);
 		}
@@ -90,9 +96,19 @@ public class MainActivity extends ListActivity implements OnItemClickListener {
 
 	@Override
 	public void onItemClick(AdapterView<?> adaptador, View lista, int posicion, long arg) {
-		HashMap<String, String> listItem = (HashMap<String, String>)getListView().getItemAtPosition(posicion);
 		
-		Toast.makeText(this, listItem.get("ID").toString(), Toast.LENGTH_SHORT).show();
+		HashMap<String, String> listItem = (HashMap<String, String>)getListView().getItemAtPosition(posicion);
+
+		//Recogemos el identificador de la tienda seleccionada
+		
+		//Creamos el intent para lanzar la actividad del detalle
+		
+		Intent intent=new Intent(this, DetailActivity.class);
+		
+		intent.putExtra("tiendaseleccionada", listItem);
+		startActivity(intent);
+		
+		//Toast.makeText(this, listItem.get("ID").toString(), Toast.LENGTH_SHORT).show();
 	}
 
 
