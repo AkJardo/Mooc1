@@ -6,5 +6,7 @@
     <string name="hello_world">Hello world!</string>
     <string name="banner">Nuestras tiendas</string>
     <string name="textview">Nuestras tiendas</string>
+    <string name="txtShopName">Nombre de la tienda</string>
+    <string name="txtShopDetail">Detalle</string>
 
 </resources>

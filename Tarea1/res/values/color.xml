@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="banner" >#0000FF</color>
+    <color name="banner" >#FFFFFF</color>
+    <color name="bannerfondo">#019FFF</color> 
+    <color name="shopDetail">#7F9DB9</color> 
     
 </resources>

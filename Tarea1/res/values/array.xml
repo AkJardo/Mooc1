@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    
+    <string-array name="J1">
+        <item >Mi pequeño Androide</item>
+        <item >Juguetes</item>
+    </string-array>
+    
+    <string-array name="L1">
+        <item >El saber no ocupa caché</item>
+        <item >Libros</item>
+    </string-array>
+    
+    <string-array name="E1">
+        <item >Android Technology</item>
+        <item >Electrónica</item>
+    </string-array>
+    
+    <string-array name="E2">
+        <item >Mooc Tec</item>
+        <item >Electrónica</item>
+    </string-array>
+    
+    <string-array name="C1">
+        <item >A-market</item>
+        <item >Comida</item>
+    </string-array>
+    
+    <string-array name="L2">
+        <item >La biblioteca de Android</item>
+        <item >Libros</item>
+    </string-array>
+    
+     <string-array name="R1">
+        <item >Cool Clothes</item>
+        <item >Ropa y complementos</item>
+    </string-array>
+    
+     <string-array name="R2">
+        <item >Fashion Android</item>
+        <item >Ropa y complementos</item>
+    </string-array>
+    
+     <string-array name="V1">
+        <item >Android Games</item>
+        <item >Videojuegos</item>
+    </string-array>
+    
+     <string-array name="V2">
+        <item >Play Droid</item>
+        <item >Videojuegos</item>
+    </string-array>
+    
+</resources>
