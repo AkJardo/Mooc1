@@ -10,10 +10,16 @@ import android.app.ListActivity;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
-public class MainActivity extends ListActivity {
+public class MainActivity extends ListActivity implements OnItemClickListener {
 
 	private TextView textBanner;
 	private List<String[]> tiendas = new ArrayList<String[]>() ;
@@ -35,20 +41,30 @@ public class MainActivity extends ListActivity {
 		//cargamos los datos de cada tienda
 		for(int i=0;i < tiendas.size();i++){
 			HashMap<String, String> tienda = new HashMap<String, String>();
+			
 			tienda.put("nombre", tiendas.get(i)[0].toString());
 			tienda.put("actividad", tiendas.get(i)[1].toString());
+			tienda.put("ID", tiendas.get(i)[2].toString());
+			
 			datosTiendas.add(tienda);
 		}
 		//cargamos la lista
-		LayoutInflater inflater= getLayoutInflater();
-		inflater.inflate(R.layout.shop_list_item, null);
-		SimpleAdapter adaptador = new SimpleAdapter(this, datosTiendas,R.layout.shop_list_item, new String[]{"nombre","actividad"}, new int[] {R.id.txtShopName,R.id.txtShopDetail} );
+		//LayoutInflater inflater= getLayoutInflater();
+		//inflater.inflate(R.layout.shop_list_item, null);
+		
+		SimpleAdapter adaptador = new SimpleAdapter(this, datosTiendas,R.layout.shop_list_item, new String[]{"nombre","actividad","ID"}, new int[] {R.id.txtShopName,R.id.txtShopDetail} );
 		
 		setListAdapter(adaptador);
 		
-	}
+		ListView lista= getListView();
+	
+		lista.setOnItemClickListener(this);
+				
+	}		
+		
 
 	private void cargarTiendas() {
+		
 		
 		tiendas.add(getResources().getStringArray(R.array.J1));
 		tiendas.add(getResources().getStringArray(R.array.E1));
@@ -70,5 +86,15 @@ public class MainActivity extends ListActivity {
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
+
+
+	@Override
+	public void onItemClick(AdapterView<?> adaptador, View lista, int posicion, long arg) {
+		HashMap<String, String> listItem = (HashMap<String, String>)getListView().getItemAtPosition(posicion);
+		
+		Toast.makeText(this, listItem.get("ID").toString(), Toast.LENGTH_SHORT).show();
+	}
+
+
 
 }
