@@ -22,6 +22,10 @@
     <string name="txtCorreo">Email</string>
     <string name="txtHorario">Horario</string>
     <string name="btnLlamar">LLAMAR</string>
+    <string name="title_activity_photo">Foto y comentarios</string>
+    <string name="imagenTienda">Imagen de una tienda</string>
+    <string name="imagenComentario">comentario</string>
+    <string name="txtComentario">Me encanto la tienda!, es genial toda la variedad de productos que tienen</string>
+    <string name="verFoto">Ver foto</string>
 
 </resources>
-

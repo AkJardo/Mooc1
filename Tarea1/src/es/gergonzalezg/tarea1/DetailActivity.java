@@ -22,6 +22,7 @@ public class DetailActivity extends Activity implements OnClickListener {
 	private TextView txtWeb;
 	private TextView txtEmail;
 	private TextView txtHorario;
+	private TextView txtFoto;
 	private Button btnLLamar;
 	
 	@Override
@@ -44,6 +45,8 @@ public class DetailActivity extends Activity implements OnClickListener {
 		txtWeb = (TextView) findViewById(R.id.txtWeb);
 		txtEmail = (TextView) findViewById(R.id.txtCorreo);
 		txtHorario = (TextView) findViewById(R.id.txtHorario);
+		txtFoto= (TextView) findViewById(R.id.txtFoto);
+		txtFoto.setOnClickListener(this);
 		
 		txtNombre.setText(tienda.get("nombre").toString());
 		txtActividad.setText(tienda.get("actividad").toString());
@@ -70,11 +73,22 @@ public class DetailActivity extends Activity implements OnClickListener {
 
 	@Override
 	public void onClick(View boton) {
-		//No necesito diferenciar botón, de momento solo tengo uno
+		Intent intent;
 		
-		Intent intent = new Intent(Intent.ACTION_DIAL);
-		intent.setData(Uri.parse("tel:" + txtTelefono.getText().toString()));
-		startActivity(intent); 
+		switch(boton.getId()){
+			case R.id.button1:
+				intent = new Intent(Intent.ACTION_DIAL);
+				intent.setData(Uri.parse("tel:" + txtTelefono.getText().toString()));
+				startActivity(intent); 
+				break;
+			case R.id.txtFoto:
+				intent = new Intent(this,PhotoActivity.class);
+				//Para otro ejemplo quiza pasarle el ID para saber que foto
+				//En el ejercicio no se especifica
+				startActivity(intent); 
+				
+		}
+	
 		
 	}
 

@@ -26,6 +26,10 @@
             android:name="es.gergonzalezg.tarea1.DetailActivity"
             android:label="@string/title_activity_detail" >
         </activity>
+        <activity
+            android:name="es.gergonzalezg.tarea1.PhotoActivity"
+            android:label="@string/title_activity_photo" >
+        </activity>
     </application>
 
 </manifest>
