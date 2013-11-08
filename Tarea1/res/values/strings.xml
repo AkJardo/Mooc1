@@ -21,6 +21,7 @@
     <string name="txtWeb">Web</string>
     <string name="txtCorreo">Email</string>
     <string name="txtHorario">Horario</string>
+    <string name="btnLlamar">LLAMAR</string>
 
 </resources>
 

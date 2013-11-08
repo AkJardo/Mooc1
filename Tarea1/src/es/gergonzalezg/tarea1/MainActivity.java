@@ -45,8 +45,8 @@ public class MainActivity extends ListActivity implements OnItemClickListener {
 			
 			tienda.put("nombre", tiendas.get(i)[0].toString());
 			tienda.put("actividad", tiendas.get(i)[1].toString());
-			tienda.put("telefono", tiendas.get(i)[2].toString());
-			tienda.put("direccion", tiendas.get(i)[3].toString());
+			tienda.put("direccion", tiendas.get(i)[2].toString());
+			tienda.put("telefono", tiendas.get(i)[3].toString());
 			tienda.put("horario", tiendas.get(i)[4].toString());
 			tienda.put("website", tiendas.get(i)[5].toString());
 			tienda.put("email", tiendas.get(i)[6].toString());
