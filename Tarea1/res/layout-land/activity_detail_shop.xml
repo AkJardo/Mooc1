@@ -136,6 +136,17 @@
             android:layout_marginRight="40dp"
             android:textColor="@color/callText"
             android:text="@string/btnLlamar" />
+
+        <TextView
+            android:id="@+id/txtFoto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/txtActividad"
+            android:layout_alignBottom="@+id/txtActividad"
+            android:layout_alignLeft="@+id/txtDireccion"
+            android:text="@string/verFoto"
+            android:textColor="@color/bannerfondo"
+            android:textStyle="italic" />
         
     </RelativeLayout>
 
