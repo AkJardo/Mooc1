@@ -3,8 +3,10 @@ package com.ug.telescopio;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import android.annotation.TargetApi;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -21,6 +23,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+
 
 public class MainActivity extends ActionBarActivity implements OnItemClickListener {
 	String country = "";
