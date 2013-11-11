@@ -4,26 +4,26 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import android.os.Bundle;
 import android.app.Activity;
 import android.app.ListActivity;
+import android.content.Context;
 import android.content.Intent;
-import android.view.Gravity;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
-import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.SimpleAdapter;
 import android.widget.TextView;
-import android.widget.Toast;
+import es.gergonzalezg.tarea1.Tienda;
 
 public class MainActivity extends ListActivity implements OnItemClickListener {
 
 	private TextView textBanner;
-	private List<String[]> tiendas = new ArrayList<String[]>() ;
+	private List<Tienda> tiendas = new ArrayList<Tienda>() ;
 	private List<HashMap<String, String>> datosTiendas= new ArrayList<HashMap<String, String>>();
 	
 	@Override
@@ -39,26 +39,8 @@ public class MainActivity extends ListActivity implements OnItemClickListener {
 		//cargamos las tiendas
 		cargarTiendas();
 	
-		//cargamos los datos de cada tienda
-		for(int i=0;i < tiendas.size();i++){
-			HashMap<String, String> tienda = new HashMap<String, String>();
-			
-			tienda.put("nombre", tiendas.get(i)[0].toString());
-			tienda.put("actividad", tiendas.get(i)[1].toString());
-			tienda.put("direccion", tiendas.get(i)[2].toString());
-			tienda.put("telefono", tiendas.get(i)[3].toString());
-			tienda.put("horario", tiendas.get(i)[4].toString());
-			tienda.put("website", tiendas.get(i)[5].toString());
-			tienda.put("email", tiendas.get(i)[6].toString());
-			tienda.put("ID", tiendas.get(i)[7].toString());
-			
-			datosTiendas.add(tienda);
-		}
-		//cargamos la lista
-		//LayoutInflater inflater= getLayoutInflater();
-		//inflater.inflate(R.layout.shop_list_item, null);
-		
-		SimpleAdapter adaptador = new SimpleAdapter(this, datosTiendas,R.layout.shop_list_item, new String[]{"nombre","actividad","ID"}, new int[] {R.id.txtShopName,R.id.txtShopDetail} );
+				
+		AdaptadorTienda adaptador = new AdaptadorTienda(this, R.layout.activity_principal, tiendas);
 		
 		setListAdapter(adaptador);
 		
@@ -68,20 +50,52 @@ public class MainActivity extends ListActivity implements OnItemClickListener {
 				
 	}		
 		
+	class AdaptadorTienda extends ArrayAdapter<Tienda>{
+
+		Context contexto;
+		List<Tienda> tiendas;
+		
+		public AdaptadorTienda(Context context, int resource,
+				List<Tienda> objects) {
+			super(context, resource, objects);
+			
+			this.contexto=context;
+			this.tiendas=objects;
+		}
+		@Override
+		public View getView(int position, View convertView, ViewGroup parent) {
+			
+			LayoutInflater inflater = ((Activity) contexto).getLayoutInflater();
+			
+			View lista=inflater.inflate(R.layout.shop_list_item, null);
+			
+			TextView textoNombre = (TextView) lista.findViewById(R.id.txtShopName);
+			TextView textoDetalle= (TextView) lista.findViewById(R.id.txtShopDetail);
+			
+			textoNombre.setText(tiendas.get(position).getNombre().toString());
+			textoDetalle.setText(tiendas.get(position).getActividad().toString());
+			
+			return lista;
+		}
+		
+	}
 
 	private void cargarTiendas() {
 		
+
 		
-		tiendas.add(getResources().getStringArray(R.array.J1));
-		tiendas.add(getResources().getStringArray(R.array.E1));
-		tiendas.add(getResources().getStringArray(R.array.E2));
-		tiendas.add(getResources().getStringArray(R.array.C1));
-		tiendas.add(getResources().getStringArray(R.array.V1));
-		tiendas.add(getResources().getStringArray(R.array.V2));
-		tiendas.add(getResources().getStringArray(R.array.L1));
-		tiendas.add(getResources().getStringArray(R.array.L2));
-		tiendas.add(getResources().getStringArray(R.array.R1));
-		tiendas.add(getResources().getStringArray(R.array.R2));
+		tiendas.add(new Tienda(1, "Mi pequeño Androide", "Juguetes", "Avenida Principal,4", "918764523", "https://www.google.com", "jugar@juego.com", "09:00-14:30   16:00-21:00"));
+		tiendas.add(new Tienda(2, "El saber no ocupa caché", "Libros", "Avenida Principal,12", "918764523", "https://www.google.com", "libro@libreria.es.com", "09:00-14:30   16:00-21:00"));
+		tiendas.add(new Tienda(3, "Android Technology", "Electrónica", "Calle de la concordia, 12 (Madrid, España)", "918764523", "https://www.google.com", "chip@correo.com", "09:00-14:30   16:00-21:00"));
+		tiendas.add(new Tienda(4, "Mooc Tec", "Electrónica", "Calle de la concordia, 12 (Madrid, España)", "918764523", "https://www.google.com", "chip@correo.com", "09:00-14:30   16:00-21:00"));
+		tiendas.add(new Tienda(5, "A-market", "Comida", "Calle de la concordia, 12 (Madrid, España)", "918764523", "https://www.google.com", "comida@correo.com", "09:00-14:30   16:00-21:00"));
+		tiendas.add(new Tienda(6, "La biblioteca de Android", "Libros", "Calle de la concordia, 12 (Madrid, España)", "918764523", "https://www.google.com", "libros@libro.com", "09:00-14:30   16:00-21:00"));
+		tiendas.add(new Tienda(7, "Cool Clothes", "Ropa y complementos", "Calle de la concordia, 12 (Madrid, España)", "918764523", "https://www.google.com", "ropaa@correo.com", "09:00-14:30   16:00-21:00"));
+		tiendas.add(new Tienda(8, "Fashion Android", "Ropa y complementos", "Calle de la concordia, 12 (Madrid, España)", "918764523", "https://www.google.com", "chip@correo.com", "09:00-14:30   16:00-21:00"));
+		tiendas.add(new Tienda(9, "Android Games", "Videojuegos", "Calle de la concordia, 12 (Madrid, España)", "918764523", "https://www.google.com", "juego@correo.com", "09:00-14:30   16:00-21:00"));
+		tiendas.add(new Tienda(10,"Play Droid", "Videojuegos", "Calle de la concordia, 12 (Madrid, España)", "918764523", "https://www.google.com", "juego@correo.com", "09:00-14:30   16:00-21:00"));
+		;
+		
 		
 		
 	}
@@ -97,15 +111,10 @@ public class MainActivity extends ListActivity implements OnItemClickListener {
 	@Override
 	public void onItemClick(AdapterView<?> adaptador, View lista, int posicion, long arg) {
 		
-		HashMap<String, String> listItem = (HashMap<String, String>)getListView().getItemAtPosition(posicion);
-
-		//Recogemos el identificador de la tienda seleccionada
-		
-		//Creamos el intent para lanzar la actividad del detalle
-		
+		Tienda tiendaSeleccionada=(Tienda) adaptador.getItemAtPosition(posicion);		
 		Intent intent=new Intent(this, DetailActivity.class);
 		
-		intent.putExtra("tiendaseleccionada", listItem);
+		intent.putExtra("tienda",tiendaSeleccionada);
 		startActivity(intent);
 		
 		//Toast.makeText(this, listItem.get("ID").toString(), Toast.LENGTH_SHORT).show();

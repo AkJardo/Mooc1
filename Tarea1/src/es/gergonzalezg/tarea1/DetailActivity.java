@@ -1,11 +1,9 @@
 package es.gergonzalezg.tarea1;
 
-import java.util.HashMap;
-
-import android.net.Uri;
-import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
+import android.os.Bundle;
 import android.text.util.Linkify;
 import android.view.Menu;
 import android.view.View;
@@ -30,9 +28,9 @@ public class DetailActivity extends Activity implements OnClickListener {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_detail_shop);
 		
-		HashMap<String, String> tienda = new HashMap<String, String>();
+		Tienda tienda ;
 		
-		tienda=(HashMap<String, String>) getIntent().getSerializableExtra("tiendaseleccionada");
+		tienda= (Tienda) getIntent().getSerializableExtra("tienda");
 		
 		btnLLamar=(Button) findViewById(R.id.button1);
 		btnLLamar.setBackgroundColor(getResources().getColor(R.color.callButton));
@@ -48,13 +46,13 @@ public class DetailActivity extends Activity implements OnClickListener {
 		txtFoto= (TextView) findViewById(R.id.txtFoto);
 		txtFoto.setOnClickListener(this);
 		
-		txtNombre.setText(tienda.get("nombre").toString());
-		txtActividad.setText(tienda.get("actividad").toString());
-		txtTelefono.setText(tienda.get("telefono").toString());
-		txtDireccion.setText(tienda.get("direccion").toString());
-		txtWeb.setText(tienda.get("website").toString());
-		txtEmail.setText(tienda.get("email").toString());
-		txtHorario.setText(tienda.get("horario").toString());
+		txtNombre.setText(tienda.getNombre().toString());
+		txtActividad.setText(tienda.getActividad().toString());
+		txtTelefono.setText(tienda.getTelefono().toString());
+		txtDireccion.setText(tienda.getDireccion().toString());
+		txtWeb.setText(tienda.getWeb().toString());
+		txtEmail.setText(tienda.getEmail().toString());
+		txtHorario.setText(tienda.getHorario().toString());
 		
 		Linkify.addLinks(txtWeb, Linkify.WEB_URLS);
 		Linkify.addLinks(txtEmail,Linkify.ALL);
