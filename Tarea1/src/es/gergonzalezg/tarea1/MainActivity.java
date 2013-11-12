@@ -1,7 +1,6 @@
 package es.gergonzalezg.tarea1;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import android.app.Activity;
@@ -18,14 +17,11 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
-import es.gergonzalezg.tarea1.Tienda;
 
 public class MainActivity extends ListActivity implements OnItemClickListener {
 
 	private TextView textBanner;
 	private List<Tienda> tiendas = new ArrayList<Tienda>() ;
-	private List<HashMap<String, String>> datosTiendas= new ArrayList<HashMap<String, String>>();
-	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);

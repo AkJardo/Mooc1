@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 	<fragment
-	    android:name="com.ug.telescopio.CountryInfoFragment"
+	    android:name="es.gergonzlaezg.pruebas.CountryInfoFragment"
 	    android:id="@+id/fragmentCountryInfo"
 	    android:layout_width="match_parent"
 	    android:layout_height="match_parent" 

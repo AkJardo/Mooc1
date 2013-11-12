@@ -23,8 +23,8 @@ public class MainActivity extends FragmentActivity implements OnItemClickListene
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		
-		String[] array_countries = new String[]{"Brasil", "MŽxico", "Colombia", "Argentina",
-												"Perœ", "Venezuela", "Chile", "Ecuador", 
+		String[] array_countries = new String[]{"Brasil", "México", "Colombia", "Argentina",
+												"Perú", "Venezuela", "Chile", "Ecuador", 
 												"Guatemala", "Cuba"};
 		ArrayList<String> countries = new ArrayList<String>(Arrays.asList(array_countries));
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, 
