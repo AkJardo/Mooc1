@@ -9,31 +9,23 @@
     tools:context=".PhotoActivity" >
 
     <ImageView
-        android:id="@+id/imageComentario"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        
-        android:layout_toRightOf="@+id/imageTienda"
-        android:contentDescription="@string/imagenComentario"
-        android:src="@drawable/comentario" />
-
-    <TextView
-        android:id="@+id/txtComentario"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/imageComentario"
-        
-        android:layout_toRightOf="@+id/imageComentario"
-        android:text="@string/txtComentario" />
-
-    <ImageView
         android:id="@+id/imageTienda"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_centerVertical="true"
-        android:layout_marginLeft="23dp"
+        
         android:contentDescription="@string/imagenTienda"
         android:src="@drawable/shop" />
 
+     <fragment
+        android:id="@+id/fragment2"
+        android:name="es.gergonzalezg.tarea2.ComentariosFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignTop="@+id/imageTienda"
+        android:layout_toRightOf="@+id/imageTienda"
+        tools:layout="@layout/fragment_comentarios" />
+    
+   
 </RelativeLayout>

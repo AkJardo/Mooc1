@@ -11,26 +11,45 @@
         android:src="@drawable/ic_action_unread"
         android:contentDescription="@string/btnComentario" />
 
-    <TextView
-        android:id="@+id/txtComentarios"
+    <ScrollView 
+        android:id="@+id/scvComentarios"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"  
+        android:layout_height="56dp"  
         android:layout_toRightOf="@+id/icoComentario"
-        android:layout_alignBottom="@+id/icoComentario"
-        android:layout_marginLeft="10dp"
-        android:text="@string/txtComentarios" />
+        android:layout_alignTop="@+id/icoComentario"
+        android:layout_marginLeft="10dp"> 
+        
+	        <TextView
+	        android:id="@+id/txtComentarios"
+	        android:layout_width="wrap_content"
+        	android:layout_height="56dp"  
+	        android:text="@string/txtComentarios" />
+	        
+   </ScrollView>
+   
 
     <EditText
-        android:id="@+id/editText1"
-        android:layout_width="match_parent"
+        android:id="@+id/editComentario"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/txtComentarios"
-        android:layout_margin="16dp"
+        android:layout_below="@+id/scvComentarios"
+        android:layout_marginLeft="26dp"
+        android:layout_marginRight="26dp"
         android:ems="10"
         android:inputType="textMultiLine" >
 
         <requestFocus />
     </EditText>
+
+    <ImageButton
+        android:id="@+id/btnNuevoComentario"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/editComentario"
+        android:layout_alignBottom="@+id/editComentario"
+        android:contentDescription="@string/btnComentario"
+        android:background="@android:color/transparent"
+        android:src="@drawable/ic_action_new" />
     
 </RelativeLayout>

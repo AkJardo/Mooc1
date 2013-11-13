@@ -18,21 +18,13 @@
         android:contentDescription="@string/imagenTienda"
         android:src="@drawable/shop" />
 
-    <ImageView
-        android:id="@+id/imageComentario"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <fragment
+        android:id="@+id/fragment2"
+        android:name="es.gergonzalezg.tarea2.ComentariosFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_below="@+id/imageTienda"
-        android:layout_toLeftOf="@+id/imageTienda"
-        android:contentDescription="@string/imagenComentario"
-        android:src="@drawable/comentario" />
-
-    <TextView
-        android:id="@+id/txtComentario"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/imageComentario"
-        android:layout_alignLeft="@+id/imageTienda"
-        android:text="@string/txtComentario" />
+        android:layout_marginTop="16dp"
+        tools:layout="@layout/fragment_comentarios" />
 
 </RelativeLayout>

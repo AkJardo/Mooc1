@@ -4,10 +4,11 @@ import es.gergonzalezg.tarea2.R;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
+import android.support.v4.app.FragmentActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class PhotoActivity extends Activity {
+public class PhotoActivity extends FragmentActivity {
 
 	private Tienda tienda;
 	
