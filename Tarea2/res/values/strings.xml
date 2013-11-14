@@ -31,5 +31,6 @@
     <string name="action_favorite">Marcar como favorito</string>
     <string name="txtComentarios">Comentarios</string>
     <string name="btnComentario">Comentarios</string>
+    <string name="txtMapa">Soy el mapa</string>
 
 </resources>

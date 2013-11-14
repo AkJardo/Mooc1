@@ -12,9 +12,9 @@
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/Theme.AppCompat.Light.DarkActionBar" >
         <activity
-            android:name="es.gergonzalezg.tarea2.MainActivity"
+            android:name="gergonzalezg.tienda.actividades.MainActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,11 +23,11 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="es.gergonzalezg.tarea2.DetailActivity"
+            android:name="gergonzalezg.tienda.actividades.DetailActivity"
             android:label="@string/title_activity_detail" >
         </activity>
         <activity
-            android:name="es.gergonzalezg.tarea2.PhotoActivity"
+            android:name="gergonzalezg.tienda.actividades.PhotoActivity"
             android:label="@string/title_activity_photo" >
         </activity>
     </application>

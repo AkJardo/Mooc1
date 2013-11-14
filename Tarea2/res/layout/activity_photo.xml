@@ -20,7 +20,7 @@
 
     <fragment
         android:id="@+id/fragment2"
-        android:name="es.gergonzalezg.tarea2.ComentariosFragment"
+        android:name="gergonzalezg.tienda.fragmentos.ComentariosFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/imageTienda"

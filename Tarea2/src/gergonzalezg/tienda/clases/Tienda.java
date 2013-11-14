@@ -1,4 +1,4 @@
-package es.gergonzalezg.tarea2;
+package gergonzalezg.tienda.clases;
 
 import java.io.Serializable;
 

@@ -150,7 +150,7 @@
 
     <fragment
         android:id="@+id/fragment1"
-        android:name="es.gergonzalezg.tarea2.ComentariosFragment"
+        android:name="gergonzalezg.tienda.fragmentos.ComentariosFragment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/button1"
