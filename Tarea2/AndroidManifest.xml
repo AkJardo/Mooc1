@@ -17,11 +17,7 @@
         <activity
             android:name="gergonzalezg.tienda.actividades.ListadoFotosActivity"
             android:label="@string/title_activity_photo" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            
         </activity>
         
         <activity
