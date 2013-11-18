@@ -25,12 +25,15 @@ public class ListadoFotosFragment extends Fragment {
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 		
-		FragmentManager fg = getChildFragmentManager();
+		
 		
 		//Instanciamos el adaptador del ViewPager
-		PagerAdapterTienda adaptador = new PagerAdapterTienda(fg);
 		
-		pager.setAdapter(adaptador);
+			FragmentManager fg = getChildFragmentManager();
+			PagerAdapterTienda adaptador = new PagerAdapterTienda(fg);
+		
+			pager.setAdapter(adaptador);
+		
 	}
 
 	@Override

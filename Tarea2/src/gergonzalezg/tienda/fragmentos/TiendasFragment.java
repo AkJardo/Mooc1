@@ -20,11 +20,18 @@ public class TiendasFragment extends Fragment implements TabListener {
 	Fragment[] fragments = new Fragment[]{new ListadoTiendaFragment(), 
 				new MapasTiendaFragment()};
 	
+	
+	
+	
+
+	
+	
+
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {	
 		super.onActivityCreated(savedInstanceState);
 		
-		
+	
 		ActionBar actionBar = ((MainActivity) getActivity()).getSupportActionBar();
 		
 		actionBar.addTab(actionBar.newTab()
@@ -40,8 +47,9 @@ public class TiendasFragment extends Fragment implements TabListener {
         manager.beginTransaction()
         	    .add(R.id.tiendasFragment, fragments[0])
         		.add(R.id.tiendasFragment, fragments[1])        		        	   
-        	    .commit();
+        	    .commit();	
 		
+			
 	}
 
 	@Override

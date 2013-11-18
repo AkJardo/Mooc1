@@ -6,14 +6,17 @@ import es.gergonzalezg.tarea2.R;
 import gergonzalezg.tienda.fragmentos.ComunidadFragment;
 import gergonzalezg.tienda.fragmentos.ListadoFotosFragment;
 import gergonzalezg.tienda.fragmentos.TiendasFragment;
+import android.content.res.Configuration;
 import android.os.Bundle;
+import android.support.v4.app.ActionBarDrawerToggle;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -24,6 +27,7 @@ public class MainActivity extends ActionBarActivity {
 	  	private ListView drawerList;
 	    private String[] drawerOptions;
 	    private DrawerLayout drawerLayout;
+	    private ActionBarDrawerToggle drawerToggle;
 	    Fragment[] fragments = new Fragment[]{new TiendasFragment(), 
 											  new ListadoFotosFragment(),
 	    									  new ComunidadFragment()};
@@ -31,29 +35,59 @@ public class MainActivity extends ActionBarActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_principal);
 		
+		setContentView(R.layout.activity_principal);
+
 		ActionBar actionBar = getSupportActionBar();
+
+		
+
+		drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+		drawerList = (ListView) findViewById(R.id.left_drawer);
+		drawerOptions = getResources().getStringArray(R.array.opcionesMenu);
+		drawerList.setAdapter(new ArrayAdapter<String>(this,
+				R.layout.list_menu_item, 
+				drawerOptions));
+		
+		drawerList.setItemChecked(0, true);
+		drawerList.setOnItemClickListener(new DrawerItemClickListener());
+
+		drawerToggle=new ActionBarDrawerToggle(this, drawerLayout, R.drawable.ic_drawer, R.string.msg_open, R.string.msg_close){
+
+			@Override
+			public void onDrawerClosed(View drawerView) {
+				
+				ActivityCompat.invalidateOptionsMenu(MainActivity.this);
+			}
+
+			@Override
+			public void onDrawerOpened(View drawerView) {
+				
+				ActivityCompat.invalidateOptionsMenu(MainActivity.this);
+			}
+			
+		};
 		
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+		actionBar.setTitle(drawerOptions[0]);
+		actionBar.setDisplayHomeAsUpEnabled(true);
+		actionBar.setHomeButtonEnabled(true);
 		
-		 drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-	        drawerList = (ListView) findViewById(R.id.left_drawer);
-	        drawerOptions = getResources().getStringArray(R.array.opcionesMenu);
-	        drawerList.setAdapter(new ArrayAdapter<String>(this,
-	        												R.layout.list_menu_item, 
-	                                                       drawerOptions));
-	        drawerList.setItemChecked(0, true);
-	        drawerList.setOnItemClickListener(new DrawerItemClickListener());
+		drawerLayout.setDrawerListener(drawerToggle);
+		
+		if (savedInstanceState == null){
+			this.getSupportFragmentManager().executePendingTransactions();
+			getSupportFragmentManager().beginTransaction()
+			.add(R.id.contentFrame, fragments[0])
+			.add(R.id.contentFrame, fragments[1])   
+			.add(R.id.contentFrame, fragments[2])        		        	   
+			.commit();
 
-	        getSupportFragmentManager().beginTransaction()
-    	    					.add(R.id.contentFrame, fragments[0])
-    	    					.add(R.id.contentFrame, fragments[1])   
-    	    					.add(R.id.contentFrame, fragments[2])        		        	   
-    	    					.commit();
-	        
-	        setContent(0);		
-				
+			setContent(0);	
+		}
+		
+			
+
 	}		
 		
 	
@@ -82,6 +116,8 @@ public class MainActivity extends ActionBarActivity {
 				actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);				
 				break;
 		}
+		
+		actionBar.setTitle(drawerOptions[index]);
 		
 		FragmentManager manager = getSupportFragmentManager();
 		
@@ -132,6 +168,38 @@ public class MainActivity extends ActionBarActivity {
         }
     }	
 	
+
+    
+    
+	@Override
+	public void onConfigurationChanged(Configuration newConfig) {
+
+		super.onConfigurationChanged(newConfig);
+		drawerToggle.onConfigurationChanged(newConfig);
+	}
+
+
+	@Override
+	protected void onPostCreate(Bundle savedInstanceState) {
+
+		super.onPostCreate(savedInstanceState);
+		drawerToggle.syncState();
+	}
+
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		if (item.getItemId() == android.R.id.home){
+			if (drawerLayout.isDrawerOpen(drawerList)){
+				drawerLayout.closeDrawer(drawerList);
+			}else {
+				drawerLayout.openDrawer(drawerList);
+			}
+
+		}
+		return super.onOptionsItemSelected(item);
+	}
+
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {

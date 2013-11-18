@@ -39,7 +39,7 @@ public class ComentariosFragment extends Fragment implements OnClickListener {
 		scvComentarios=(ScrollView) comentarios.findViewById(R.id.scvComentarios);
 		txtComentarios= (TextView) scvComentarios.findViewById(R.id.txtComentarios);
 		nuevoComentario= (EditText) comentarios.findViewById(R.id.editComentario);
-		txtComentarios.setText("");
+		txtComentarios.setText("- Me encantó la tienda. Volveré!\n");
 		
 		botonAdd.setOnClickListener(this);
 		

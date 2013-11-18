@@ -33,5 +33,7 @@
     <string name="btnComentario">Comentarios</string>
     <string name="txtMapa">Soy el mapa</string>
     <string name="txtComunidad">Soy la comunidad</string>
+    <string name="msg_open">abrir</string>
+    <string name="msg_close">cerrar</string>
 
 </resources>
