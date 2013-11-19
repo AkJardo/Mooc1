@@ -1,4 +1,4 @@
-package com.ug.telescopio.fragments;
+package android.support.v7.appcompat.ug.telescopio.fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -11,8 +11,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.ug.telescopio.R;
-import com.ug.telescopio.activities.MainActivity;
+import android.support.v7.appcompat.ug.telescopio.R;
+import android.support.v7.appcompat.ug.telescopio.activities.MainActivity;
 
 public class CountriesContentFragment extends Fragment implements TabListener {
 	Fragment[] fragments = new Fragment[]{new CountriesListFragment(), 
@@ -26,7 +26,6 @@ public class CountriesContentFragment extends Fragment implements TabListener {
 		
 		final ActionBar actionBar = ((MainActivity) getActivity()).getSupportActionBar();
 	    
-		 
         actionBar.addTab(
                 actionBar.newTab()
                         .setText(getResources().getString(R.string.list_title))
@@ -36,26 +35,13 @@ public class CountriesContentFragment extends Fragment implements TabListener {
                 actionBar.newTab()
                         .setText(getResources().getString(R.string.flags_title))
                         .setTabListener(this));  
-        
-        
-        FragmentManager manager = getChildFragmentManager();
+        FragmentManager manager = getActivity().getSupportFragmentManager();
         manager.beginTransaction()
         	    .add(R.id.mainContent, fragments[0])
         		.add(R.id.mainContent, fragments[1])        		        	   
         	    .commit();	
-        
 	}
 	
-	
-	
-	@Override
-	public void onDestroy() {
-		
-		super.onDestroy();
-	}
-
-
-
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {		

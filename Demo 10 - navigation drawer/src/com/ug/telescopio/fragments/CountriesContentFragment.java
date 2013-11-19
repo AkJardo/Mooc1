@@ -26,7 +26,6 @@ public class CountriesContentFragment extends Fragment implements TabListener {
 		
 		final ActionBar actionBar = ((MainActivity) getActivity()).getSupportActionBar();
 	    
-		 
         actionBar.addTab(
                 actionBar.newTab()
                         .setText(getResources().getString(R.string.list_title))
@@ -36,26 +35,13 @@ public class CountriesContentFragment extends Fragment implements TabListener {
                 actionBar.newTab()
                         .setText(getResources().getString(R.string.flags_title))
                         .setTabListener(this));  
-        
-        
-        FragmentManager manager = getChildFragmentManager();
+        FragmentManager manager = getActivity().getSupportFragmentManager();
         manager.beginTransaction()
         	    .add(R.id.mainContent, fragments[0])
         		.add(R.id.mainContent, fragments[1])        		        	   
         	    .commit();	
-        
 	}
 	
-	
-	
-	@Override
-	public void onDestroy() {
-		
-		super.onDestroy();
-	}
-
-
-
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {		
