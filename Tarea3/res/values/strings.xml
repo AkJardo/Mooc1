@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Mooc Shop</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="banner">Nuestras tiendas</string>
+    <string name="textview">Nuestras tiendas</string>
+    <string name="txtShopName">Nombre de la tienda</string>
+    <string name="txtShopDetail">Detalle</string>
+    <string name="txtNombre">Nombre</string>
+    <string name="txtActividad">Actividad</string>
+    <string name="txtTelefono">111111111</string>
+    <string name="title_activity_detail">Información</string>
+    <string name="lblTelefono">Telf:</string>
+    <string name="lblDireccion">Dirección:</string>
+    <string name="lblHorarios">Horario:</string>
+    <string name="txtDireccion">direccion</string>
+    <string name="lblWeb">Web:</string>
+    <string name="lblCorreo">Correo:</string>
+    <string name="txtWeb">Web</string>
+    <string name="txtCorreo">Email</string>
+    <string name="txtHorario">Horario</string>
+    <string name="btnLlamar">LLAMAR</string>
+    <string name="title_activity_photo">Foto y comentarios</string>
+    <string name="imagenTienda">Imagen de una tienda</string>
+    <string name="imagenComentario">comentario</string>
+    <string name="txtComentario">Me encanto la tienda!, es genial toda la variedad de productos que tienen</string>
+    <string name="verFoto">Ver foto</string>
+    <string name="action_share">Compartir</string>
+    <string name="action_favorite">Marcar como favorito</string>
+    <string name="txtComentarios">Comentarios</string>
+    <string name="btnComentario">Comentarios</string>
+    <string name="txtMapa">Soy el mapa</string>
+    <string name="txtComunidad">Soy la comunidad</string>
+    <string name="msg_open">abrir</string>
+    <string name="msg_close">cerrar</string>
+
+</resources>

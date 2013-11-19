@@ -33,6 +33,7 @@ public class MainActivity extends ActionBarActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		
+		
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawerList = (ListView) findViewById(R.id.left_drawer);
         drawerOptions = getResources().getStringArray(R.array.drawer_options);
@@ -65,6 +66,10 @@ public class MainActivity extends ActionBarActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
         
+        if (savedInstanceState!=null){
+			return;
+		}
+		
         FragmentManager manager = getSupportFragmentManager();
         manager.beginTransaction()
         	    .add(R.id.contentFrame, fragments[0])

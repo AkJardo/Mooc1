@@ -1,0 +1,10 @@
+Hola,
+
+
+Como recordatorio:
+
+Estamos usando las librerias de compatibilidad. Así que es necesario tener el proyecto creado de Appcompat v7, tal como se explica
+en la documentación de Android. En cualquier caso adjunto un APK para ver el funcionamiento de la aplicación. Aunque esta APK tiene errores
+que en el emulador no se producen, como solapamiento de fragmentos.
+
+Muchas gracias.

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="banner" >#FFFFFF</color>
+    <color name="bannerfondo">#019FFF</color> 
+    <color name="shopDetail">#7F9DB9</color>
+    <color name="fields">#7F9DB9</color>  
+    <color name="callText" >#FFFFFF</color>
+    <color name="callButton">#019FFF</color> 
+</resources>
