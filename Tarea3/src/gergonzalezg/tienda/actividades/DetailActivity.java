@@ -1,7 +1,7 @@
 package gergonzalezg.tienda.actividades;
 
 import es.gergonzalezg.tarea2.R;
-import gergonzalezg.tienda.clases.Tienda;
+import gergonzalezg.tienda.clases.Shop;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -25,7 +25,7 @@ public class DetailActivity extends FragmentActivity implements OnClickListener 
 	private TextView txtHorario;
 	private TextView txtFoto;
 	private Button btnLLamar;
-	private Tienda tienda;
+	private Shop tienda;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +34,7 @@ public class DetailActivity extends FragmentActivity implements OnClickListener 
 		
 		
 		
-		tienda= (Tienda) getIntent().getSerializableExtra("tienda");
+		tienda= (Shop) getIntent().getSerializableExtra("tienda");
 		
 		btnLLamar=(Button) findViewById(R.id.button1);
 		btnLLamar.setBackgroundColor(getResources().getColor(R.color.callButton));

@@ -1,24 +1,23 @@
 package gergonzalezg.tienda.actividades;
 
 import es.gergonzalezg.tarea2.R;
-import gergonzalezg.tienda.clases.Tienda;
-import android.os.Bundle;
-import android.app.Activity;
+import gergonzalezg.tienda.clases.Shop;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
 public class PhotoActivity extends FragmentActivity {
 
-	private Tienda tienda;
+	private Shop tienda;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_photo);
 		
-		tienda=(Tienda) getIntent().getSerializableExtra("tienda");
+		tienda=(Shop) getIntent().getSerializableExtra("tienda");
 	}
 
 	@Override

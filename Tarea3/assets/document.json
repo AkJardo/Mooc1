@@ -1,0 +1,209 @@
+[
+    {
+        "type": "store",
+        "name": "Mi pequeño Androide",
+        "activity": "Juguetes",
+        "address": "14 calle de prueba, piso 2C",
+        "phone": "916743524",
+        "hoursOfOperaion": "Lunes a viernes de 8AM a 8PM",
+        "url": "http://www.latiendadelibros.com",
+        "email": "info@latiendadelibros.com",
+        "comments": [
+            {
+                "comment": "mi lugar favorito"
+            },
+            {
+                "comment": "excelentes ofertas"
+            }
+        ],
+        "favorites": 20,
+        "location": {
+            "lat": 14.61,
+            "longitude": -90.5
+        }
+    },
+    {
+        "type": "store",
+        "name": "El saber no ocupa caché",
+        "activity": "Libros",
+        "address": "14 calle de prueba, piso 2C",
+        "phone": "916743524",
+        "hoursOfOperaion": "Lunes a viernes de 8AM a 8PM",
+        "url": "http://www.juguetes.com",
+        "email": "info@juguetes.com",
+        "comments": [
+            {
+                "comment": "mi lugar favorito"
+            },
+            {
+                "comment": "excelentes ofertas"
+            }
+        ],
+        "favorites": 20,
+        "location": {
+            "lat": 15.61,
+            "longitude": -100.5
+        }
+    },
+    {
+        "type": "store",
+        "name": "Android Technology",
+        "activity": "Electrónica",
+        "address": "14 calle de prueba, piso 2C",
+        "phone": "916743524",
+        "hoursOfOperaion": "Lunes a viernes de 8AM a 8PM",
+        "url": "http://www.electronica.com",
+        "email": "info@tech.com",
+        "comments": [
+            {
+                "comment": "mi lugar favorito"
+            },
+            {
+                "comment": "excelentes ofertas"
+            }
+        ],
+        "favorites": 20,
+        "location": {
+            "lat": 15.61,
+            "longitude": -100.5
+        }
+    },
+    {
+        "type": "store",
+        "name": "A-Market",
+        "activity": "Comida",
+        "address": "14 calle de prueba, piso 2C",
+        "phone": "916743524",
+        "hoursOfOperaion": "Lunes a viernes de 8AM a 8PM",
+        "url": "http://www.comida.com",
+        "email": "info@comida.com",
+        "comments": [
+            {
+                "comment": "mi lugar favorito"
+            },
+            {
+                "comment": "excelentes ofertas"
+            }
+        ],
+        "favorites": 20,
+        "location": {
+            "lat": 15.61,
+            "longitude": -100.5
+        }
+    },
+    {
+        "type": "store",
+        "name": "Mooc Tec",
+        "activity": "Electrónica",
+        "address": "14 calle de prueba, piso 2C",
+        "phone": "916743524",
+        "hoursOfOperaion": "Lunes a viernes de 8AM a 8PM",
+        "url": "http://www.comida.com",
+        "email": "info@tech.com",
+        "comments": [
+            {
+                "comment": "mi lugar favorito"
+            },
+            {
+                "comment": "excelentes ofertas"
+            }
+        ],
+        "favorites": 20,
+        "location": {
+            "lat": 15.61,
+            "longitude": -100.5
+        }
+    },
+    {
+        "type": "store",
+        "name": "Play Droid",
+        "activity": "Videojuegos",
+        "address": "14 calle de prueba, piso 2C",
+        "phone": "916743524",
+        "hoursOfOperaion": "Lunes a viernes de 8AM a 8PM",
+        "url": "http://www.videojuegos.com",
+        "email": "info@videojuegos.com",
+        "comments": [
+            {
+                "comment": "mi lugar favorito"
+            },
+            {
+                "comment": "excelentes ofertas"
+            }
+        ],
+        "favorites": 20,
+        "location": {
+            "lat": 15.61,
+            "longitude": -100.5
+        }
+    },
+    {
+        "type": "store",
+        "name": "Cool Clothes",
+        "activity": "Ropa y complementos",
+        "address": "14 calle de prueba, piso 2C",
+        "phone": "916743524",
+        "hoursOfOperaion": "Lunes a viernes de 8AM a 8PM",
+        "url": "http://www.ropa.com",
+        "email": "info@ropa.com",
+        "comments": [
+            {
+                "comment": "mi lugar favorito"
+            },
+            {
+                "comment": "excelentes ofertas"
+            }
+        ],
+        "favorites": 20,
+        "location": {
+            "lat": 15.61,
+            "longitude": -100.5
+        }
+    },
+    {
+        "type": "store",
+        "name": "Fashion Android",
+        "activity": "Ropa y complementos",
+        "address": "14 calle de prueba, piso 2C",
+        "phone": "916743524",
+        "hoursOfOperaion": "Lunes a viernes de 8AM a 8PM",
+        "url": "http://www.ropa.com",
+        "email": "info@ropa.com",
+        "comments": [
+            {
+                "comment": "mi lugar favorito"
+            },
+            {
+                "comment": "excelentes ofertas"
+            }
+        ],
+        "favorites": 20,
+        "location": {
+            "lat": 15.61,
+            "longitude": -100.5
+        }
+    },
+    {
+        "type": "store",
+        "name": "La biblioteca de Android",
+        "activity": "Libros",
+        "address": "14 calle de prueba, piso 2C",
+        "phone": "916743524",
+        "hoursOfOperaion": "Lunes a viernes de 8AM a 8PM",
+        "url": "http://www.libros.com",
+        "email": "info@libros.com",
+        "comments": [
+            {
+                "comment": "mi lugar favorito"
+            },
+            {
+                "comment": "excelentes ofertas"
+            }
+        ],
+        "favorites": 20,
+        "location": {
+            "lat": 15.61,
+            "longitude": -100.5
+        }
+    }
+]
