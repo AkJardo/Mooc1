@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 
 import android.app.Activity;
@@ -29,7 +28,6 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
@@ -119,58 +117,28 @@ public class ListadoTiendaFragment extends Fragment  {
 	
 	private void cargarTiendas() {
 		
-		/*tiendas.add(new Shop(1, "Mi pequeño Androide", "Juguetes", "Avenida Principal,4", "918764523", "https://www.google.com", "jugar@juego.com", "09:00-14:30   16:00-21:00"));
-		tiendas.add(new Shop(2, "El saber no ocupa caché", "Libros", "Avenida Principal,12", "918764523", "https://www.google.com", "libro@libreria.es.com", "09:00-14:30   16:00-21:00"));
-		tiendas.add(new Shop(3, "Android Technology", "Electrónica", "Calle de la concordia, 12 (Madrid, España)", "918764523", "https://www.google.com", "chip@correo.com", "09:00-14:30   16:00-21:00"));
-		tiendas.add(new Shop(4, "Mooc Tec", "Electrónica", "Calle de la concordia, 12 (Madrid, España)", "918764523", "https://www.google.com", "chip@correo.com", "09:00-14:30   16:00-21:00"));
-		tiendas.add(new Shop(5, "A-market", "Comida", "Calle de la concordia, 12 (Madrid, España)", "918764523", "https://www.google.com", "comida@correo.com", "09:00-14:30   16:00-21:00"));
-		tiendas.add(new Shop(6, "La biblioteca de Android", "Libros", "Calle de la concordia, 12 (Madrid, España)", "918764523", "https://www.google.com", "libros@libro.com", "09:00-14:30   16:00-21:00"));
-		tiendas.add(new Shop(7, "Cool Clothes", "Ropa y complementos", "Calle de la concordia, 12 (Madrid, España)", "918764523", "https://www.google.com", "ropaa@correo.com", "09:00-14:30   16:00-21:00"));
-		tiendas.add(new Shop(8, "Fashion Android", "Ropa y complementos", "Calle de la concordia, 12 (Madrid, España)", "918764523", "https://www.google.com", "chip@correo.com", "09:00-14:30   16:00-21:00"));
-		tiendas.add(new Shop(9, "Android Games", "Videojuegos", "Calle de la concordia, 12 (Madrid, España)", "918764523", "https://www.google.com", "juego@correo.com", "09:00-14:30   16:00-21:00"));
-		tiendas.add(new Shop(10,"Play Droid", "Videojuegos", "Calle de la concordia, 12 (Madrid, España)", "918764523", "https://www.google.com", "juego@correo.com", "09:00-14:30   16:00-21:00"));*/
+		//Recuperamos los datos
 		
-		
-		//Recuperamos los datos con JSON, como es mi api uso la libreria GSON
-		
-		GetData(FROM_PARSE_JSON);
-		
-		/*JsonElement json = new JsonParser().parse();
-		
-		
-		JsonArray array= json.getAsJsonArray();
-		Iterator<JsonElement> iterator = array.iterator();
-		 
-			 
-		while(iterator.hasNext()){
-		    JsonElement json2 = (JsonElement)iterator.next();
-		    Gson gson = new Gson();
-		    Shop tienda = gson.fromJson(json2, Shop.class);
-		    tiendas.add(tienda);
-		}
-			*/
-		
+		GetData(FROM_FILE_JSON);
 		
 	}
 
-	private String GetData(int fuenteDatos) {
+	private void GetData(int fuenteDatos) {
 		
-		String resultado="";
-		
+			
 		//Podemos elegir el método para cargarlo los datos de las tiendas
 		//Como se propone de bonus en la primera parte de la tarea3
 		switch (fuenteDatos){
 		
 		case FROM_FILE_JSON:
-			resultado = loadJSONFromAsset();		
+			loadJSONFromAsset();		
 			break;
 		case FROM_PARSE_JSON:
-			resultado = loadJSONFromParseDotCom();
+			loadJSONFromParseDotCom();
 			break;
 		}
 		
-		return resultado;
-		
+				
 	}
 
 	private String loadJSONFromParseDotCom() {
@@ -183,8 +151,7 @@ public class ListadoTiendaFragment extends Fragment  {
 			@Override
 			public void done(List<ParseObject> lista, ParseException arg1) {
 				
-				Gson gson = new Gson();
-				
+								
 				Iterator<ParseObject> iterator = lista.iterator();
 				while(iterator.hasNext()){
 					
@@ -197,7 +164,7 @@ public class ListadoTiendaFragment extends Fragment  {
 					tienda.setDireccion(parseTienda.getString("address"));
 					tienda.setEmail(parseTienda.getString("email"));
 					tienda.setWeb(parseTienda.getString("url"));
-					tienda.setHorario(parseTienda.getString("hoursOfOperation"));
+					tienda.setHorario(parseTienda.getString("hoursOfOperaion"));
 					tienda.setFavorites(parseTienda.getInt("favorites"));
 					
 					List<Comment> comentarios=new ArrayList<Comment>();
@@ -214,13 +181,15 @@ public class ListadoTiendaFragment extends Fragment  {
 						comentarios.add(comentario);
 					}
 								
-					tienda.setComentarios((Comment[])comentarios.toArray());
+					tienda.setComentarios((Comment[])comentarios.toArray(new Comment[comentarios.size()]));
 					
 					Location localizacion=new Location();
 					
 					try {
+						
 						localizacion.setLatitude((float)parseTienda.getJSONObject("location").getDouble("lat"));
-						localizacion.setLatitude((float)parseTienda.getJSONObject("location").getDouble("longitude"));
+						localizacion.setLongitude((float)parseTienda.getJSONObject("location").getDouble("longitude"));
+					
 					} catch (JSONException e) {
 						Log.e("TAG", e.getMessage());
 					}
@@ -234,7 +203,7 @@ public class ListadoTiendaFragment extends Fragment  {
 		return null;
 	}
 
-	public String loadJSONFromAsset() {
+	public void loadJSONFromAsset() {
         String json = null;
         try {
 
@@ -250,12 +219,30 @@ public class ListadoTiendaFragment extends Fragment  {
 
             json = new String(buffer, "UTF-8");
 
+            
+            
 
         } catch (IOException ex) {
-            ex.printStackTrace();
-            return null;
+        	ex.printStackTrace();
+
         }
-        return json;
+
+
+        JsonElement jsonElement = new JsonParser().parse(json);
+
+
+        JsonArray array= jsonElement.getAsJsonArray();
+        Iterator<JsonElement> iterator = array.iterator();
+
+
+        while(iterator.hasNext()){
+        	JsonElement json2 = (JsonElement)iterator.next();
+        	Gson gson = new Gson();
+        	Shop tienda = gson.fromJson(json2, Shop.class);
+        	tiendas.add(tienda);
+		}
+			
+        
 
     }
 }

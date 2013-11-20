@@ -2,12 +2,15 @@ package gergonzalezg.tienda.actividades;
 
 
 
-import com.parse.Parse;
-
 import es.gergonzalezg.tarea2.R;
+import gergonzalezg.tienda.clases.AdaptadorImagen;
+import gergonzalezg.tienda.clases.Photo;
 import gergonzalezg.tienda.fragmentos.ComunidadFragment;
 import gergonzalezg.tienda.fragmentos.ListadoFotosFragment;
 import gergonzalezg.tienda.fragmentos.TiendasFragment;
+
+import java.util.ArrayList;
+
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
@@ -24,15 +27,24 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.Volley;
+import com.parse.Parse;
+
+
+
+
 public class MainActivity extends ActionBarActivity {
 
-	  	private ListView drawerList;
-	    private String[] drawerOptions;
-	    private DrawerLayout drawerLayout;
-	    private ActionBarDrawerToggle drawerToggle;
-	    Fragment[] fragments = new Fragment[]{new TiendasFragment(), 
-											  new ListadoFotosFragment(),
-	    									  new ComunidadFragment()};
+	
+	public static RequestQueue requestQueue;
+	private ListView drawerList;
+	private String[] drawerOptions;
+	private DrawerLayout drawerLayout;
+	private ActionBarDrawerToggle drawerToggle;
+	Fragment[] fragments = new Fragment[]{new TiendasFragment(), 
+			new ListadoFotosFragment(),
+			new ComunidadFragment()};
 	    
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +52,8 @@ public class MainActivity extends ActionBarActivity {
 		
 		setContentView(R.layout.activity_principal);
 
+		requestQueue = Volley.newRequestQueue(this);
+	    
 		ActionBar actionBar = getSupportActionBar();
 
 		Parse.initialize(this, "9294wWt5A27wRU2QAaaUgqhXsTymYYM8oFixqunP", "7Lv0g3mpQJjYiqGRDYixtPixf54pmXPF0nijQ0zk");
@@ -204,10 +218,6 @@ public class MainActivity extends ActionBarActivity {
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
-
-
-	
-
 
 
 
