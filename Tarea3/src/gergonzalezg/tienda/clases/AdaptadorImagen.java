@@ -13,11 +13,9 @@ import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.NetworkImageView;
 
@@ -58,7 +56,7 @@ public class AdaptadorImagen extends BaseAdapter
 		ViewHolder holder;
 		Photo currentImage = dataArray.get(position);
 		if (convertView == null) {
-			convertView = inflater.inflate(R.layout.shop_list_item, null);
+			convertView = inflater.inflate(R.layout.photo_list_item, null);
 
 			holder = new ViewHolder();
 			holder.imgCommunity = (NetworkImageView) convertView.findViewById(R.id.imgCommunity);
