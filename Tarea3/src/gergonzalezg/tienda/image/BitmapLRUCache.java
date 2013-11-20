@@ -6,7 +6,7 @@ import android.support.v4.util.LruCache;
 import com.android.volley.toolbox.ImageLoader.ImageCache;
 
 public class BitmapLRUCache extends LruCache<String, Bitmap> implements ImageCache {
-	private static final int CACHE_SIZE_BYTES = 4 * 1024 * 1024; // 4 MB
+	private static final int CACHE_SIZE_BYTES = 1 * 1024 * 1024; // 4 MB
 	
 	public BitmapLRUCache() {
 		super(CACHE_SIZE_BYTES);

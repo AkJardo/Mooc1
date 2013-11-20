@@ -1,7 +1,7 @@
 package gergonzalezg.tienda.image;
 
 public class Helper {
-	public final static String INSTAGRAM_API_KEY = "fc8041d4af1544a2939c3f5a9a1ef8cf";
+	public final static String INSTAGRAM_API_KEY = "981d99451ee7461aa177fc9caf778c66";
 	public final static String BASE_API_URL = "https://api.instagram.com/v1/";
 	
 	public static String getRecentUrl(String tag){
