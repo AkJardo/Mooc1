@@ -2,6 +2,8 @@ package gergonzalezg.tienda.actividades;
 
 
 
+import com.parse.Parse;
+
 import es.gergonzalezg.tarea2.R;
 import gergonzalezg.tienda.fragmentos.ComunidadFragment;
 import gergonzalezg.tienda.fragmentos.ListadoFotosFragment;
@@ -40,7 +42,7 @@ public class MainActivity extends ActionBarActivity {
 
 		ActionBar actionBar = getSupportActionBar();
 
-		
+		Parse.initialize(this, "9294wWt5A27wRU2QAaaUgqhXsTymYYM8oFixqunP", "7Lv0g3mpQJjYiqGRDYixtPixf54pmXPF0nijQ0zk");
 
 		drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 		drawerList = (ListView) findViewById(R.id.left_drawer);

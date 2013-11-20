@@ -60,4 +60,4 @@ public class ComunidadFragment extends Fragment {
 	}
 }
 
-}
+

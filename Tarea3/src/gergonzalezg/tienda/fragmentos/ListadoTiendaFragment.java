@@ -2,6 +2,8 @@ package gergonzalezg.tienda.fragmentos;
 
 import es.gergonzalezg.tarea2.R;
 import gergonzalezg.tienda.actividades.DetailActivity;
+import gergonzalezg.tienda.clases.Comment;
+import gergonzalezg.tienda.clases.Location;
 import gergonzalezg.tienda.clases.Shop;
 
 import java.io.IOException;
@@ -10,11 +12,15 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,14 +29,22 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
+import com.parse.FindCallback;
+import com.parse.ParseException;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
 
 public class ListadoTiendaFragment extends Fragment  {
 
+	private final static int FROM_FILE_JSON=0;
+	private final static int FROM_PARSE_JSON=1;
+	
 	private ListView lista;
 	private List<Shop> tiendas = new ArrayList<Shop>() ;
 	
@@ -119,8 +133,11 @@ public class ListadoTiendaFragment extends Fragment  {
 		
 		//Recuperamos los datos con JSON, como es mi api uso la libreria GSON
 		
+		GetData(FROM_PARSE_JSON);
 		
-		JsonElement json = new JsonParser().parse(loadJSONFromAsset());
+		/*JsonElement json = new JsonParser().parse();
+		
+		
 		JsonArray array= json.getAsJsonArray();
 		Iterator<JsonElement> iterator = array.iterator();
 		 
@@ -131,9 +148,90 @@ public class ListadoTiendaFragment extends Fragment  {
 		    Shop tienda = gson.fromJson(json2, Shop.class);
 		    tiendas.add(tienda);
 		}
+			*/
+		
+		
+	}
+
+	private String GetData(int fuenteDatos) {
+		
+		String resultado="";
+		
+		//Podemos elegir el método para cargarlo los datos de las tiendas
+		//Como se propone de bonus en la primera parte de la tarea3
+		switch (fuenteDatos){
+		
+		case FROM_FILE_JSON:
+			resultado = loadJSONFromAsset();		
+			break;
+		case FROM_PARSE_JSON:
+			resultado = loadJSONFromParseDotCom();
+			break;
+		}
+		
+		return resultado;
+		
+	}
+
+	private String loadJSONFromParseDotCom() {
+		
+		ParseQuery<ParseObject> query = ParseQuery.getQuery("Store");
+		
+		//Cogemos todos, si no podriamos usar where
+		query.findInBackground(new FindCallback<ParseObject>() {
 			
-		
-		
+			@Override
+			public void done(List<ParseObject> lista, ParseException arg1) {
+				
+				Gson gson = new Gson();
+				
+				Iterator<ParseObject> iterator = lista.iterator();
+				while(iterator.hasNext()){
+					
+					Shop tienda = new Shop();
+					ParseObject parseTienda = (ParseObject)iterator.next();
+					
+					tienda.setNombre(parseTienda.getString("name"));
+					tienda.setActividad(parseTienda.getString("activity"));
+					tienda.setTelefono(parseTienda.getString("phone"));
+					tienda.setDireccion(parseTienda.getString("address"));
+					tienda.setEmail(parseTienda.getString("email"));
+					tienda.setWeb(parseTienda.getString("url"));
+					tienda.setHorario(parseTienda.getString("hoursOfOperation"));
+					tienda.setFavorites(parseTienda.getInt("favorites"));
+					
+					List<Comment> comentarios=new ArrayList<Comment>();
+					
+					for(int i=0; i<parseTienda.getJSONArray("comments").length();i++){
+						
+						Comment comentario = new Comment();
+						try {
+							comentario.setComentario(parseTienda.getJSONArray("comments").getJSONObject(i).getString("comment"));
+						} catch (JSONException e) {
+							
+							Log.e("TAG", e.getMessage());
+						}
+						comentarios.add(comentario);
+					}
+								
+					tienda.setComentarios((Comment[])comentarios.toArray());
+					
+					Location localizacion=new Location();
+					
+					try {
+						localizacion.setLatitude((float)parseTienda.getJSONObject("location").getDouble("lat"));
+						localizacion.setLatitude((float)parseTienda.getJSONObject("location").getDouble("longitude"));
+					} catch (JSONException e) {
+						Log.e("TAG", e.getMessage());
+					}
+					
+					tienda.setLocalizacion(localizacion);
+					
+				    tiendas.add(tienda);
+				}
+			}
+		});
+		return null;
 	}
 
 	public String loadJSONFromAsset() {
