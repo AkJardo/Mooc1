@@ -10,14 +10,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonParser;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -31,6 +23,11 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
 
 public class ListadoTiendaFragment extends Fragment  {
 
@@ -124,18 +121,14 @@ public class ListadoTiendaFragment extends Fragment  {
 		
 		
 		JsonElement json = new JsonParser().parse(loadJSONFromAsset());
-		 
 		JsonArray array= json.getAsJsonArray();
+		Iterator<JsonElement> iterator = array.iterator();
 		 
-		Iterator iterator = array.iterator();
-		 
-		
-		 
+			 
 		while(iterator.hasNext()){
 		    JsonElement json2 = (JsonElement)iterator.next();
 		    Gson gson = new Gson();
 		    Shop tienda = gson.fromJson(json2, Shop.class);
-		    //can set some values in contact, if required 
 		    tiendas.add(tienda);
 		}
 			

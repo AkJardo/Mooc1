@@ -85,7 +85,7 @@ public class DetailActivity extends FragmentActivity implements OnClickListener 
 				intent.setAction(Intent.ACTION_SEND);
 				intent.putExtra(Intent.EXTRA_TEXT, "Visita nuestra tienda " + txtNombre.getText() + " en la web " + txtWeb.getText());
 				intent.setType("text/plain");
-				startActivity(intent.createChooser(intent,getString(R.string.action_share)));
+				startActivity(Intent.createChooser(intent,getString(R.string.action_share)));
 				
 		default:
 				return super.onMenuItemSelected(featureId, item);

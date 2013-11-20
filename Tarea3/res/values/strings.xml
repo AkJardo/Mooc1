@@ -35,5 +35,7 @@
     <string name="txtComunidad">Soy la comunidad</string>
     <string name="msg_open">abrir</string>
     <string name="msg_close">cerrar</string>
+    <string name="msg_img">imagen de la comunidad</string>
+    <string name="txtCommunity">Soy el texto que acompaña a la foto</string>
 
 </resources>

@@ -11,8 +11,6 @@ import android.widget.ImageButton;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import es.gergonzalezg.tarea2.R;
-import es.gergonzalezg.tarea2.R.id;
-import es.gergonzalezg.tarea2.R.layout;
 
 public class ComentariosFragment extends Fragment implements OnClickListener {
 

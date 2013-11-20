@@ -98,6 +98,12 @@ private int id;
 		this.email = email;
 		this.hoursOfOperaion = horario;
 	}
+	public int getFavorites() {
+		return favorites;
+	}
+	public void setFavorites(int favorites) {
+		this.favorites = favorites;
+	}
 	
 	
 	
