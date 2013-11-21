@@ -12,12 +12,17 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ListView;
 
 import com.android.volley.Request;
@@ -30,7 +35,7 @@ public class ComunidadFragment extends Fragment {
 
 	AdaptadorImagen adapter;
 	ArrayList<Photo> imagesArray;
-	
+	ImageButton btnFoto;
 	
 	
 	@Override
@@ -45,6 +50,25 @@ public class ComunidadFragment extends Fragment {
 		
 	
 	    ListView listView = (ListView) getActivity().findViewById(R.id.listCommunity);
+	    btnFoto = (ImageButton) getActivity().findViewById(R.id.btnFoto);
+	    btnFoto.setOnTouchListener(new OnTouchListener() {
+			
+			@Override
+			public boolean onTouch(View button, MotionEvent event) {
+				  if (event.getAction() == MotionEvent.ACTION_DOWN) {
+			            ((ImageView) button).setColorFilter(Color.argb(150, 155, 155, 155));
+			            //Mostramos el AlertDialog
+			            new FotoSeleccionFragment().show(getFragmentManager(), "");
+			            return true;
+			        } else if (event.getAction() == MotionEvent.ACTION_UP) {
+			            ((ImageView) button).setColorFilter(Color.argb(0, 155, 155, 155)); // or null
+			            return true;
+			        }
+			        
+				return false;
+			}
+		});
+		
 	    listView.setAdapter(adapter);	
 	    
 	    APICall();
@@ -54,7 +78,10 @@ public class ComunidadFragment extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		
-		return inflater.inflate(R.layout.fragment_comunidad, null);
+		View vista=inflater.inflate(R.layout.fragment_comunidad, null);
+		
+		
+		return vista;
 	}
 	
 	

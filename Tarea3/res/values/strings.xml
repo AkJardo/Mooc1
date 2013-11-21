@@ -37,5 +37,10 @@
     <string name="msg_close">cerrar</string>
     <string name="msg_img">imagen de la comunidad</string>
     <string name="txtCommunity">Soy el texto que acompaña a la foto</string>
+    <string name="msg_btnFoto">Boton de foto</string>
+    <string name="msg_foto">Seleccione el origen</string>
+    <string name="msg_foto_camera">Camara...</string>
+    <string name="msg_foto_gallery">Galeria de imágenes...</string>
+
 
 </resources>
