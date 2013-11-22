@@ -1,6 +1,6 @@
 package gergonzalezg.tienda.clases;
 
-import es.gergonzalezg.tarea2.R;
+import es.gergonzalezg.tarea3.R;
 import gergonzalezg.tienda.actividades.MainActivity;
 import gergonzalezg.tienda.image.BitmapLRUCache;
 
@@ -10,6 +10,7 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -68,7 +69,11 @@ public class AdaptadorImagen extends BaseAdapter
 			holder = (ViewHolder) convertView.getTag();
 		}
 
-		holder.imgCommunity.setImageUrl(currentImage.getURL(), imageLoader);
+		if (currentImage.isLocal()){
+			holder.imgCommunity.setImageURI(Uri.parse(currentImage.getURI()));
+		}else 
+			holder.imgCommunity.setImageUrl(currentImage.getURL(), imageLoader);
+		
 		holder.txtCommunity.setText(currentImage.getDescripcion());
 		return convertView;
 
