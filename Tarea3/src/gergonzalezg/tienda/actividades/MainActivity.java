@@ -2,15 +2,10 @@ package gergonzalezg.tienda.actividades;
 
 
 
-import es.gergonzalezg.tarea2.R;
-import gergonzalezg.tienda.clases.AdaptadorImagen;
-import gergonzalezg.tienda.clases.Photo;
+import es.gergonzalezg.tarea3.R;
 import gergonzalezg.tienda.fragmentos.ComunidadFragment;
 import gergonzalezg.tienda.fragmentos.ListadoFotosFragment;
 import gergonzalezg.tienda.fragmentos.TiendasFragment;
-
-import java.util.ArrayList;
-
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;

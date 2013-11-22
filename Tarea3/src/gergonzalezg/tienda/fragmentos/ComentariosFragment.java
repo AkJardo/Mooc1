@@ -10,7 +10,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ScrollView;
 import android.widget.TextView;
-import es.gergonzalezg.tarea2.R;
+import es.gergonzalezg.tarea3.R;
 
 public class ComentariosFragment extends Fragment implements OnClickListener {
 

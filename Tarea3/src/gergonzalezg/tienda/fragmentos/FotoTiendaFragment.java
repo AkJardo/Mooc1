@@ -1,12 +1,12 @@
 package gergonzalezg.tienda.fragmentos;
 
-import es.gergonzalezg.tarea2.R;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import es.gergonzalezg.tarea3.R;
 
 public class FotoTiendaFragment extends Fragment {
 

@@ -2,7 +2,7 @@ package gergonzalezg.tienda.actividades;
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
-import es.gergonzalezg.tarea2.R;
+import es.gergonzalezg.tarea3.R;
 
 public class ListadoFotosActivity extends FragmentActivity {
 

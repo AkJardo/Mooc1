@@ -1,6 +1,6 @@
 package gergonzalezg.tienda.fragmentos;
 
-import es.gergonzalezg.tarea2.R;
+import es.gergonzalezg.tarea3.R;
 import gergonzalezg.tienda.clases.PagerAdapterTienda;
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;

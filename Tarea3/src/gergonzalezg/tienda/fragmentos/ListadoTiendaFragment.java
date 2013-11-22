@@ -1,6 +1,6 @@
 package gergonzalezg.tienda.fragmentos;
 
-import es.gergonzalezg.tarea2.R;
+import es.gergonzalezg.tarea3.R;
 import gergonzalezg.tienda.actividades.DetailActivity;
 import gergonzalezg.tienda.clases.Comment;
 import gergonzalezg.tienda.clases.Location;

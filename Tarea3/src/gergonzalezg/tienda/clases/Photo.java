@@ -1,5 +1,7 @@
 package gergonzalezg.tienda.clases;
 
+import java.util.ArrayList;
+
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -11,7 +13,7 @@ public class Photo {
 	private String URL="";
 	private String URI="";
 	private String Descripcion;
-	private Comment[] comentarios;
+	private ArrayList<Comment> comentarios=new ArrayList<Comment>();
 	private int favoritos=0;
 	private String usuario="";
 	//uso esta propiedad para determinar si es una imagen local (URI) o remota (URL)
@@ -39,11 +41,11 @@ public class Photo {
 		Descripcion = descripcion;
 	}
 
-	public Comment[] getComentarios() {
+	public ArrayList<Comment> getComentarios() {
 		return comentarios;
 	}
 
-	public void setComentarios(Comment[] comentarios) {
+	public void setComentarios(ArrayList<Comment> comentarios) {
 		this.comentarios = comentarios;
 	}
 
@@ -92,11 +94,12 @@ public class Photo {
 		shopToParse.put("favoritos", favoritos);
 		shopToParse.put("local", isLocal);
 		
-		comentarios=new Comment[1];
+		comentarios=new ArrayList<Comment>();
 		
-		comentarios[0].setComentario("asdfasdfasdf");
+		comentarios.add(new Comment());
+		comentarios.get(0).setComentario("asdfasdfasdfasdf");
 		
-		shopToParse.put("comentarios", gson.toJson(comentarios,Comment.class));
+		shopToParse.put("comentarios", gson.toJson(comentarios,ArrayList.class));
 		
 		shopToParse.saveInBackground();
 		

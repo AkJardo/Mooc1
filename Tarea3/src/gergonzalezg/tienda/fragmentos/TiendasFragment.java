@@ -1,5 +1,7 @@
 package gergonzalezg.tienda.fragmentos;
 
+import es.gergonzalezg.tarea3.R;
+import gergonzalezg.tienda.actividades.MainActivity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -10,8 +12,6 @@ import android.support.v7.app.ActionBar.TabListener;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import es.gergonzalezg.tarea2.R;
-import gergonzalezg.tienda.actividades.MainActivity;
 
 
 

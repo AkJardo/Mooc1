@@ -1,6 +1,6 @@
 package gergonzalezg.tienda.actividades;
 
-import es.gergonzalezg.tarea2.R;
+import es.gergonzalezg.tarea3.R;
 import gergonzalezg.tienda.clases.Shop;
 import android.content.Intent;
 import android.os.Bundle;

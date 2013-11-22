@@ -130,7 +130,7 @@ implements NoticeDialogListener,Serializable{
 
 
 	public void APICall() {
-		String url = Helper.getRecentUrl("landscape");
+		String url = Helper.getRecentUrl("shop");
 
 
 		Response.Listener<JSONObject> successListener = 
@@ -239,9 +239,10 @@ implements NoticeDialogListener,Serializable{
 			newPhoto.setDescripcion("Descripción imagen: " + timeStamp);
 
 			imagesArray.add(0,newPhoto);
+			newPhoto.enviarParse();
 			adapter.notifyDataSetChanged();
 			
-			newPhoto.enviarParse();
+			
 			//ImageView imageView = (ImageView) findViewById(R.id.img);
 			//imageView.setImageBitmap(BitmapFactory.decodeFile(picturePath));
 		}
