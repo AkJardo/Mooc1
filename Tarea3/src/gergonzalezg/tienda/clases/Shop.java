@@ -1,6 +1,7 @@
 package gergonzalezg.tienda.clases;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class Shop implements Serializable {
 
@@ -16,7 +17,7 @@ private int id;
 	private String url;
 	private String email;
 	
-	private Comment[] comments;
+	private ArrayList<Comment> comments;
 	private Location location;
 	private int favorites;
 
@@ -69,10 +70,10 @@ private int id;
 		this.hoursOfOperaion = horario;
 	}
 		
-	public Comment[] getComentarios() {
+	public ArrayList<Comment> getComentarios() {
 		return comments;
 	}
-	public void setComentarios(Comment[] comentarios) {
+	public void setComentarios(ArrayList<Comment> comentarios) {
 		this.comments = comentarios;
 	}
 	public Location getLocalizacion() {

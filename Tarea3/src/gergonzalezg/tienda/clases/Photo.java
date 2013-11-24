@@ -3,10 +3,7 @@ package gergonzalezg.tienda.clases;
 import java.util.ArrayList;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
 import com.parse.ParseObject;
-import com.parse.ParseQuery;
 
 public class Photo {
 

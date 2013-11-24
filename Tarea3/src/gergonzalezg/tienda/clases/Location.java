@@ -1,7 +1,13 @@
 package gergonzalezg.tienda.clases;
 
-public class Location {
+import java.io.Serializable;
+
+public class Location implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1309909376214958986L;
 	private float lat;
 	private float longitude;
 	

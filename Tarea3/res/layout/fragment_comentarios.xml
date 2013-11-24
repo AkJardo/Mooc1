@@ -8,13 +8,15 @@
         android:id="@+id/icoComentario"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
         android:src="@drawable/ic_action_unread"
         android:contentDescription="@string/btnComentario" />
 
     <ScrollView 
         android:id="@+id/scvComentarios"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="56dp"  
+        android:layout_toLeftOf="@+id/layoutFavorito"
         android:layout_toRightOf="@+id/icoComentario"
         android:layout_alignTop="@+id/icoComentario"
         android:layout_marginLeft="10dp"> 
@@ -51,5 +53,33 @@
         android:contentDescription="@string/btnComentario"
         android:background="@android:color/transparent"
         android:src="@drawable/ic_action_new" />
+
+    <LinearLayout 
+        android:id="@+id/layoutFavorito"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_alignParentRight="true"
+        >
+        
+        <ImageButton
+        android:id="@+id/btnFavorito"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/btnFavorito"
+        android:background="@android:color/transparent"
+        android:src="@android:drawable/btn_star" />
+
+    <TextView
+        android:id="@+id/txtFavorito"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/txtFavorito"
+        android:gravity="center_horizontal"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+    
+        
+    </LinearLayout>
+    
     
 </RelativeLayout>

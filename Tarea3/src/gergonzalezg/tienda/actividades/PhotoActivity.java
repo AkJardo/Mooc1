@@ -2,15 +2,18 @@ package gergonzalezg.tienda.actividades;
 
 import es.gergonzalezg.tarea3.R;
 import gergonzalezg.tienda.clases.Shop;
+import gergonzalezg.tienda.fragmentos.ComentariosFragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.WindowManager;
 
 public class PhotoActivity extends FragmentActivity {
 
 	private Shop tienda;
+	private ComentariosFragment comentariosFragment;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -18,6 +21,11 @@ public class PhotoActivity extends FragmentActivity {
 		setContentView(R.layout.activity_photo);
 		
 		tienda=(Shop) getIntent().getSerializableExtra("tienda");
+		
+		comentariosFragment = (ComentariosFragment) getSupportFragmentManager().findFragmentById(R.id.fragmentComentarioFoto);
+		comentariosFragment.loadComments(tienda.getComentarios());
+		
+		getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
 	}
 
 	@Override

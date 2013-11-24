@@ -2,6 +2,7 @@ package gergonzalezg.tienda.actividades;
 
 import es.gergonzalezg.tarea3.R;
 import gergonzalezg.tienda.clases.Shop;
+import gergonzalezg.tienda.fragmentos.ComentariosFragment;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -11,12 +12,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 
 public class DetailActivity extends FragmentActivity implements OnClickListener {
 
-	private TextView txtNombre;
+	public TextView txtNombre;
 	private TextView txtActividad;
 	private TextView txtTelefono;
 	private TextView txtDireccion;
@@ -26,6 +28,7 @@ public class DetailActivity extends FragmentActivity implements OnClickListener 
 	private TextView txtFoto;
 	private Button btnLLamar;
 	private Shop tienda;
+	private ComentariosFragment comentariosFragment;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +38,12 @@ public class DetailActivity extends FragmentActivity implements OnClickListener 
 		
 		
 		tienda= (Shop) getIntent().getSerializableExtra("tienda");
+		
+
+		comentariosFragment = (ComentariosFragment) getSupportFragmentManager().findFragmentById(R.id.fragmentComentarioDetalle);
+		comentariosFragment.loadComments(tienda.getComentarios());
+		comentariosFragment.loadFavorites(tienda.getFavorites());
+		comentariosFragment.setNombreTienda(tienda.getNombre());
 		
 		btnLLamar=(Button) findViewById(R.id.button1);
 		btnLLamar.setBackgroundColor(getResources().getColor(R.color.callButton));
@@ -61,11 +70,14 @@ public class DetailActivity extends FragmentActivity implements OnClickListener 
 		Linkify.addLinks(txtWeb, Linkify.WEB_URLS);
 		Linkify.addLinks(txtEmail,Linkify.ALL);
 		
+		getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
 		//Esto no funciona, preguntar por qué
 		//Linkify.addLinks(txtTelefono,Linkify.ALL,"tel:");
 		//txtTelefono.setAutoLinkMask(Linkify.PHONE_NUMBERS);
 	}
 
+	
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.

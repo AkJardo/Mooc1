@@ -19,7 +19,7 @@
         android:src="@drawable/shop" />
 
     <fragment
-        android:id="@+id/fragment2"
+        android:id="@+id/fragmentComentarioFoto"
         android:name="gergonzalezg.tienda.fragmentos.ComentariosFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

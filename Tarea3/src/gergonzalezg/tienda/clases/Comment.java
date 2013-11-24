@@ -1,7 +1,13 @@
 package gergonzalezg.tienda.clases;
 
-public class Comment {
+import java.io.Serializable;
 
+public class Comment implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3607451723936061762L;
 	private String comment;
 	
 	public Comment() {

@@ -167,7 +167,7 @@ public class ListadoTiendaFragment extends Fragment  {
 					tienda.setHorario(parseTienda.getString("hoursOfOperaion"));
 					tienda.setFavorites(parseTienda.getInt("favorites"));
 					
-					List<Comment> comentarios=new ArrayList<Comment>();
+					ArrayList<Comment> comentarios=new ArrayList<Comment>();
 					
 					for(int i=0; i<parseTienda.getJSONArray("comments").length();i++){
 						
@@ -181,7 +181,7 @@ public class ListadoTiendaFragment extends Fragment  {
 						comentarios.add(comentario);
 					}
 								
-					tienda.setComentarios((Comment[])comentarios.toArray(new Comment[comentarios.size()]));
+					tienda.setComentarios(comentarios);
 					
 					Location localizacion=new Location();
 					

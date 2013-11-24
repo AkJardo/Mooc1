@@ -149,7 +149,7 @@
         android:textStyle="italic" />
 
     <fragment
-        android:id="@+id/fragment1"
+        android:id="@+id/fragmentComentarioDetalle"
         android:name="gergonzalezg.tienda.fragmentos.ComentariosFragment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

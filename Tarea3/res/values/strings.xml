@@ -41,6 +41,8 @@
     <string name="msg_foto">Seleccione el origen</string>
     <string name="msg_foto_camera">Camara...</string>
     <string name="msg_foto_gallery">Galeria de imágenes...</string>
+    <string name="btnFavorito">Marcar como favorito</string>
+    <string name="txtFavorito">0</string>
 
 
 </resources>
