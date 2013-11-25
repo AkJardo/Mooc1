@@ -45,6 +45,7 @@ public class ListadoTiendaFragment extends Fragment  {
 	
 	private ListView lista;
 	private List<Shop> tiendas = new ArrayList<Shop>() ;
+	AdaptadorTienda adaptador;
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -58,7 +59,7 @@ public class ListadoTiendaFragment extends Fragment  {
 				cargarTiendas();
 			
 						
-				AdaptadorTienda adaptador = new AdaptadorTienda(getActivity(), R.layout.activity_principal, tiendas);
+				adaptador = new AdaptadorTienda(getActivity(), R.layout.activity_principal, tiendas);
 				
 				lista.setAdapter(adaptador);
 				
@@ -119,7 +120,7 @@ public class ListadoTiendaFragment extends Fragment  {
 		
 		//Recuperamos los datos
 		
-		GetData(FROM_FILE_JSON);
+		GetData(FROM_PARSE_JSON);
 		
 	}
 
@@ -198,6 +199,7 @@ public class ListadoTiendaFragment extends Fragment  {
 					
 				    tiendas.add(tienda);
 				}
+				adaptador.notifyDataSetChanged();
 			}
 		});
 		return null;

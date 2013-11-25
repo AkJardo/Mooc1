@@ -6,6 +6,10 @@ import gergonzalezg.tienda.clases.Comment;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -90,7 +94,9 @@ public class ComentariosFragment extends Fragment implements OnClickListener {
 		if (!(nuevoComentario.getText().toString() == "")){
 			Comment newComment = new Comment();
 			newComment.setComentario(nuevoComentario.getText().toString());
+			this.comentarios.add(newComment);
 			writeComment(newComment);
+			updateComentarios();
 		}
 	}
 	
@@ -125,7 +131,40 @@ public class ComentariosFragment extends Fragment implements OnClickListener {
 		});
 	}
 	
+private void updateComentarios(){
+		
+		ParseQuery<ParseObject> query = ParseQuery.getQuery("Store");
+		query.whereEqualTo("name", nombreTienda);
+		query.findInBackground(new FindCallback<ParseObject>() {
+		    public void done(List<ParseObject> scoreList, ParseException e) {
+		       
+		            //Si encontramos la tienda actualizamos los comentarios
+		    	
+		    	JSONArray listaComentarios=new JSONArray();
+		    	
+		    	for (int i=0; i < ComentariosFragment.this.comentarios.size();i++){
+		    		JSONObject comentario = new JSONObject();
+		    		
+		    		try {
+						comentario.put("comment", ComentariosFragment.this.comentarios.get(i).getComentario());
+						listaComentarios.put(comentario);
+						
+					} catch (JSONException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+		    	}
+
+		    	
+		        scoreList.get(0).put("comments", listaComentarios);	
+		        scoreList.get(0).saveInBackground();
+		        
+		    }
+		});
+	}
+	
 	private void writeComment(Comment comentario){
+		
 		txtComentarios.setText(txtComentarios.getText().toString() + "- " + comentario.getComentario().toString() + '\n');
 	}
 	
@@ -134,6 +173,7 @@ public class ComentariosFragment extends Fragment implements OnClickListener {
 		this.comentarios=comentarios;
 	
 		for(int i=0; i<comentarios.size();i++){
+			//this.comentarios.add(comentarios.get(i));
 			writeComment(comentarios.get(i));
 		}
 	}
