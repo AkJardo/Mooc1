@@ -1,7 +1,6 @@
 package gergonzalezg.tienda.fragmentos;
 
 import gergonzalezg.tienda.actividades.MainActivity;
-import android.os.Bundle;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesClient.ConnectionCallbacks;
@@ -12,15 +11,13 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 
+import android.os.Bundle;
+
 public class StoreMapFragment extends SupportMapFragment
 							  implements OnConnectionFailedListener,ConnectionCallbacks{
 	private GoogleMap map;
 	private Bundle savedInstanceState;
 	LocationClient locationClient;
-	public static final int MAP_NORMAL=0;
-	public static final int MAP_HYBRID=1;
-	public static final int MAP_SATELLITE=2;
-	public static final int MAP_TERRAIN=3;
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -64,28 +61,7 @@ public class StoreMapFragment extends SupportMapFragment
 
     	map.getUiSettings().setZoomControlsEnabled(false);
     }
-      
-    public void reloadMapMode(int modoMapa) {
-    	if (map != null) {
-    		switch(modoMapa){
-    		case MAP_NORMAL:
-    			map.setMapType(GoogleMap.MAP_TYPE_NORMAL);
-    			break;
-    		case MAP_HYBRID:
-    			map.setMapType(GoogleMap.MAP_TYPE_HYBRID);
-    			break;
-    		case MAP_SATELLITE:
-    			map.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
-    			break;
-    		case MAP_TERRAIN:
-    			map.setMapType(GoogleMap.MAP_TYPE_TERRAIN);
-    			break;
-    		}
-
-    	}
-
-    	
-    }
+           	
    
     
     

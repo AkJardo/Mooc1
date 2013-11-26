@@ -46,6 +46,7 @@ public class DialogFotoSeleccionFragment extends DialogFragment {
 		adaptador.add(getResources().getString(R.string.msg_foto_gallery));
 		
 		builder.setTitle(getResources().getString(R.string.msg_foto))
+		
 				.setAdapter(adaptador, new OnClickListener() {
 					
 					@Override

@@ -10,6 +10,8 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBar.Tab;
 import android.support.v7.app.ActionBar.TabListener;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -18,7 +20,7 @@ import android.view.ViewGroup;
 public class TiendasFragment extends Fragment implements TabListener {
 
 	Fragment[] fragments = new Fragment[]{new ListadoTiendaFragment(), 
-				new MapasTiendaFragment()};
+				new StoreMapFragment()};
 	
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {	
@@ -42,8 +44,10 @@ public class TiendasFragment extends Fragment implements TabListener {
         		.add(R.id.tiendasFragment, fragments[1])        		        	   
         	    .commit();
 		
+        
 	}
 
+		
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {

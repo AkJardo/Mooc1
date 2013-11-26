@@ -208,22 +208,17 @@ public class MainActivity extends ActionBarActivity
 			}
 
 		}else if(item.getItemId() == R.id.map_selector){
-			/** Getting the fragment manager */
+		
             FragmentManager manager = getSupportFragmentManager();
 
-            /** Instantiating the DialogFragment class */
             AlertDialogRadio alert = new AlertDialogRadio();
 
-            /** Creating a bundle object to store the selected item's index */
             Bundle b  = new Bundle();
 
-            /** Storing the selected item's index in the bundle object */
             b.putInt("position", optionMap);
 
-            /** Setting the bundle object to the dialog fragment object */
             alert.setArguments(b);
 
-            /** Creating the dialog fragment object, which will in turn open the alert dialog window */
             alert.show(manager, "alert_dialog_radio");
 		}
 		return super.onOptionsItemSelected(item);

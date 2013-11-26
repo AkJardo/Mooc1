@@ -3,9 +3,12 @@ package gergonzalezg.tienda.actividades;
 
 
 import es.gergonzalezg.tarea4.R;
+import gergonzalezg.tienda.fragmentos.AlertDialogRadio;
+import gergonzalezg.tienda.fragmentos.AlertDialogRadio.AlertPositiveListener;
 import gergonzalezg.tienda.fragmentos.ComunidadFragment;
 import gergonzalezg.tienda.fragmentos.ListadoFotosFragment;
 import gergonzalezg.tienda.fragmentos.TiendasFragment;
+import android.content.Context;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
@@ -27,11 +30,12 @@ import com.android.volley.toolbox.Volley;
 import com.parse.Parse;
 
 
-
-
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends ActionBarActivity
+						  implements AlertPositiveListener	{
 
 	
+	private int optionMap;
+	public static Context contexto;
 	public static RequestQueue requestQueue;
 	private ListView drawerList;
 	private String[] drawerOptions;
@@ -45,6 +49,7 @@ public class MainActivity extends ActionBarActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
+		contexto=this;
 		setContentView(R.layout.activity_principal);
 
 		requestQueue = Volley.newRequestQueue(this);
@@ -83,7 +88,7 @@ public class MainActivity extends ActionBarActivity {
 		actionBar.setTitle(drawerOptions[0]);
 		actionBar.setDisplayHomeAsUpEnabled(true);
 		actionBar.setHomeButtonEnabled(true);
-		
+	
 		drawerLayout.setDrawerListener(drawerToggle);
 		
 		getSupportFragmentManager().beginTransaction()
@@ -202,17 +207,45 @@ public class MainActivity extends ActionBarActivity {
 				drawerLayout.openDrawer(drawerList);
 			}
 
+		}else if(item.getItemId() == R.id.map_selector){
+			/** Getting the fragment manager */
+            FragmentManager manager = getSupportFragmentManager();
+
+            /** Instantiating the DialogFragment class */
+            AlertDialogRadio alert = new AlertDialogRadio();
+
+            /** Creating a bundle object to store the selected item's index */
+            Bundle b  = new Bundle();
+
+            /** Storing the selected item's index in the bundle object */
+            b.putInt("position", optionMap);
+
+            /** Setting the bundle object to the dialog fragment object */
+            alert.setArguments(b);
+
+            /** Creating the dialog fragment object, which will in turn open the alert dialog window */
+            alert.show(manager, "alert_dialog_radio");
 		}
 		return super.onOptionsItemSelected(item);
 	}
 
-
+	
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
+
+
+	@Override
+	public void onPositiveClick(int position) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	
 
 
 
