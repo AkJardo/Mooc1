@@ -19,6 +19,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.Activity;
+import android.app.NotificationManager;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -30,6 +31,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -44,6 +46,8 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.NetworkImageView;
+import com.parse.ParseException;
+import com.parse.SaveCallback;
 
 public class ComunidadFragment extends Fragment 
 implements NoticeDialogListener,Serializable{
@@ -209,9 +213,29 @@ implements NoticeDialogListener,Serializable{
 
 		imagesArray.add(0,newPhoto);
 		
+		newPhoto.enviarParse().saveInBackground(new SaveCallback() {
+			
+			@Override
+			public void done(ParseException arg0) {
+				NotificationCompat.Builder mBuilder =
+				        new NotificationCompat.Builder(ComunidadFragment.this.getActivity())
+				        .setSmallIcon(R.drawable.ic_launcher)
+				        .setContentTitle("Imagen de la cámara")
+				        .setContentText("Imagen de la cámara subida a Parse.com");
+				
+				NotificationManager mNotificationManager =
+					    (NotificationManager) ComunidadFragment.this.getActivity().getSystemService(ComunidadFragment.this.getActivity().NOTIFICATION_SERVICE);
+					// mId allows you to update the notification later on.
+					mNotificationManager.notify(0, mBuilder.build());
+
+				
+			}
+		});
 
 		mediaScanIntent.setData(contentUri);
 		getActivity().sendBroadcast(mediaScanIntent);
+		
+		
 		
 		adapter.notifyDataSetChanged();
 	}
@@ -239,7 +263,24 @@ implements NoticeDialogListener,Serializable{
 			newPhoto.setDescripcion("Descripción imagen: " + timeStamp);
 
 			imagesArray.add(0,newPhoto);
-			newPhoto.enviarParse();
+			newPhoto.enviarParse().saveInBackground(new SaveCallback() {
+				
+				@Override
+				public void done(ParseException arg0) {
+					NotificationCompat.Builder mBuilder =
+					        new NotificationCompat.Builder(ComunidadFragment.this.getActivity())
+					        .setSmallIcon(R.drawable.ic_launcher)
+					        .setContentTitle("Imagen de la cámara")
+					        .setContentText("Imagen de la cámara subida a Parse.com");
+					
+					NotificationManager mNotificationManager =
+						    (NotificationManager) ComunidadFragment.this.getActivity().getSystemService(ComunidadFragment.this.getActivity().NOTIFICATION_SERVICE);
+						// mId allows you to update the notification later on.
+						mNotificationManager.notify(0, mBuilder.build());
+
+					
+				}
+			});
 			adapter.notifyDataSetChanged();
 			
 			

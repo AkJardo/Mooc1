@@ -2,10 +2,17 @@ package gergonzalezg.tienda.clases;
 
 import java.util.ArrayList;
 
-import com.google.gson.Gson;
-import com.parse.ParseObject;
+import android.app.Activity;
+import android.support.v4.app.NotificationCompat;
 
-public class Photo {
+import com.google.gson.Gson;
+import com.parse.ParseException;
+import com.parse.ParseFile;
+import com.parse.ParseObject;
+import com.parse.SaveCallback;
+
+public class Photo
+				{
 
 	private String URL="";
 	private String URI="";
@@ -77,7 +84,7 @@ public class Photo {
 	}
 
 	
-	public boolean enviarParse(){
+	public ParseObject enviarParse(){
 		
 		Gson gson= new Gson();
 		
@@ -91,6 +98,12 @@ public class Photo {
 		shopToParse.put("favoritos", favoritos);
 		shopToParse.put("local", isLocal);
 		
+		//Enviamos el fichero de la imagen, podemos guardar tanto una ruta (ya sea local o remota) como la imagen
+		//Aquí ya entraría en el diseño de cada uno como consumir esa imagen, si por la ruta o el fichero.
+		//Para el caso de ejemplo yo guardo la ruta de las imagenes caputaradas de la camara
+		//Mas tarde no consumo la imagen local subida porque no tiene porque exisitr la ruta en vuestro emulador.
+		//Si hubiera subido la imagen funcionaría, pero el objetivo es enviar info a parse.com
+		
 		comentarios=new ArrayList<Comment>();
 		
 		comentarios.add(new Comment());
@@ -98,9 +111,9 @@ public class Photo {
 		
 		shopToParse.put("comentarios", gson.toJson(comentarios,ArrayList.class));
 		
-		shopToParse.saveInBackground();
 		
-		return false;
+		
+		return shopToParse;
 	}
 	
 }

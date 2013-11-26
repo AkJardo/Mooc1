@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <ListView
+        android:id="@+id/listCommunity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/btnFoto"
+         android:layout_alignParentTop="true"
+        >
+    </ListView>
+    
+    <ImageButton 
+        android:id="@+id/btnFoto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" 
+        android:contentDescription="@string/msg_btnFoto"
+        android:background="#ff33b5e5"
+        android:padding="8dp"
+        android:layout_alignParentBottom="true"
+        android:src="@drawable/ic_action_camera">
+    </ImageButton>
+
+</RelativeLayout>

@@ -1,0 +1,44 @@
+Hola,
+
+
+Como recordatorio:
+
+Estamos usando las librerias de compatibilidad. Así que es necesario tener el proyecto creado de Appcompat v7, tal como se explica
+en la documentación de Android. En cualquier caso adjunto un APK para ver el funcionamiento de la aplicación. 
+
+
+En principio está realizado tanto la aprte bonus como todos los puntos del bonus. Para cambiar la forma en que se carga el listado
+de tiendas buscar este codigo en ListaTiendasFragment.java
+
+
+private void cargarTiendas() {
+		
+		//Recuperamos los datos
+		
+		GetData(FROM_PARSE_JSON);
+		
+	}
+
+	private void GetData(int fuenteDatos) {
+		
+			
+		//Podemos elegir el método para cargarlo los datos de las tiendas
+		//Como se propone de bonus en la primera parte de la tarea3
+		switch (fuenteDatos){
+		
+		case FROM_FILE_JSON:
+			loadJSONFromAsset();		
+			break;
+		case FROM_PARSE_JSON:
+			loadJSONFromParseDotCom();
+			break;
+		}
+		
+				
+	}
+
+
+Dependiendo de la constante cargara desde el fichero o desde parse.com, donde tengo dadas de altas un par de clases.
+Para los comentarios y favoritos podrás ver que se envian a parse.com y se recuperan de parse.com.
+
+Muchas gracias. Un saludo.
