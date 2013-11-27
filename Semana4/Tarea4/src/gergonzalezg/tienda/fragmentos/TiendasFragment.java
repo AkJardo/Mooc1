@@ -19,6 +19,8 @@ import android.view.ViewGroup;
 
 public class TiendasFragment extends Fragment implements TabListener {
 
+	public final static String TAG_MAP_FRAGMENT="MapaFragmento";
+	
 	Fragment[] fragments = new Fragment[]{new ListadoTiendaFragment(), 
 				new StoreMapFragment()};
 	
@@ -41,7 +43,7 @@ public class TiendasFragment extends Fragment implements TabListener {
 		
         manager.beginTransaction()
         	    .add(R.id.tiendasFragment, fragments[0])
-        		.add(R.id.tiendasFragment, fragments[1])        		        	   
+        		.add(R.id.tiendasFragment, fragments[1],TAG_MAP_FRAGMENT)        		        	   
         	    .commit();
 		
         

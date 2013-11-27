@@ -1,11 +1,5 @@
 package gergonzalezg.tienda.fragmentos;
 
-import es.gergonzalezg.tarea4.R;
-import gergonzalezg.tienda.actividades.DetailActivity;
-import gergonzalezg.tienda.clases.Comment;
-import gergonzalezg.tienda.clases.Location;
-import gergonzalezg.tienda.clases.Shop;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -38,15 +32,35 @@ import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
+import es.gergonzalezg.tarea4.R;
+import gergonzalezg.tienda.actividades.DetailActivity;
+import gergonzalezg.tienda.app.App;
+import gergonzalezg.tienda.clases.Comment;
+import gergonzalezg.tienda.clases.Location;
+import gergonzalezg.tienda.clases.Shop;
+
 public class ListadoTiendaFragment extends Fragment  {
 
 	private final static int FROM_FILE_JSON=0;
 	private final static int FROM_PARSE_JSON=1;
-	
+	private List<Shop> tiendas;
 	private ListView lista;
-	private List<Shop> tiendas = new ArrayList<Shop>() ;
+	
 	AdaptadorTienda adaptador;
 	
+	
+	
+	
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		
+		super.onCreate(savedInstanceState);
+		tiendas=((App)getActivity().getApplicationContext()).getTiendas();
+		
+		//cargamos las tiendas
+		cargarTiendas();
+	}
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -55,9 +69,7 @@ public class ListadoTiendaFragment extends Fragment  {
 		
 				lista=(ListView) view.findViewById(R.id.list);
 								
-				//cargamos las tiendas
-				cargarTiendas();
-			
+					
 						
 				adaptador = new AdaptadorTienda(getActivity(), R.layout.activity_principal, tiendas);
 				
@@ -120,7 +132,7 @@ public class ListadoTiendaFragment extends Fragment  {
 		
 		//Recuperamos los datos
 		
-		GetData(FROM_PARSE_JSON);
+		GetData(FROM_FILE_JSON);
 		
 	}
 

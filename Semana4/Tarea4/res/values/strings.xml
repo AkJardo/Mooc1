@@ -44,6 +44,7 @@
     <string name="btnFavorito">Marcar como favorito</string>
     <string name="txtFavorito">0</string>
     <string name="map_selector">Tipo de mapa</string>
+    <string name="infoSnippet">%1$s \n Teléfono: %2$s</string>
     
 
 

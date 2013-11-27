@@ -7,6 +7,7 @@ import gergonzalezg.tienda.fragmentos.AlertDialogRadio;
 import gergonzalezg.tienda.fragmentos.AlertDialogRadio.AlertPositiveListener;
 import gergonzalezg.tienda.fragmentos.ComunidadFragment;
 import gergonzalezg.tienda.fragmentos.ListadoFotosFragment;
+import gergonzalezg.tienda.fragmentos.StoreMapFragment;
 import gergonzalezg.tienda.fragmentos.TiendasFragment;
 import android.content.Context;
 import android.content.res.Configuration;
@@ -235,7 +236,9 @@ public class MainActivity extends ActionBarActivity
 
 	@Override
 	public void onPositiveClick(int position) {
-		// TODO Auto-generated method stub
+		optionMap=position;
+		StoreMapFragment fragment = (StoreMapFragment) getSupportFragmentManager().findFragmentByTag(TiendasFragment.TAG_MAP_FRAGMENT);
+		fragment.reloadMapMode(optionMap);
 		
 	}
 
