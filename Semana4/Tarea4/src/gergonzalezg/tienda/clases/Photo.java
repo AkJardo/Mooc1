@@ -14,6 +14,7 @@ import com.parse.SaveCallback;
 public class Photo
 				{
 
+	private int id=0;
 	private String URL="";
 	private String URI="";
 	private String Descripcion;
@@ -114,6 +115,14 @@ public class Photo
 		
 		
 		return shopToParse;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 	
 }

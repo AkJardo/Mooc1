@@ -1,5 +1,12 @@
 package gergonzalezg.tienda.fragmentos;
 
+import es.gergonzalezg.tarea4.R;
+import gergonzalezg.tienda.actividades.DetailActivity;
+import gergonzalezg.tienda.app.App;
+import gergonzalezg.tienda.clases.Comment;
+import gergonzalezg.tienda.clases.Location;
+import gergonzalezg.tienda.clases.Shop;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -32,17 +39,12 @@ import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
-import es.gergonzalezg.tarea4.R;
-import gergonzalezg.tienda.actividades.DetailActivity;
-import gergonzalezg.tienda.app.App;
-import gergonzalezg.tienda.clases.Comment;
-import gergonzalezg.tienda.clases.Location;
-import gergonzalezg.tienda.clases.Shop;
-
 public class ListadoTiendaFragment extends Fragment  {
 
 	private final static int FROM_FILE_JSON=0;
 	private final static int FROM_PARSE_JSON=1;
+	private final static int FROM_DATABASE=2;
+	private gergonzalezg.tienda.data.DBAdapter db; 
 	private List<Shop> tiendas;
 	private ListView lista;
 	
@@ -56,7 +58,7 @@ public class ListadoTiendaFragment extends Fragment  {
 		
 		super.onCreate(savedInstanceState);
 		tiendas=((App)getActivity().getApplicationContext()).getTiendas();
-		
+		db=((App)getActivity().getApplicationContext()).getDB();
 		//cargamos las tiendas
 		cargarTiendas();
 	}
@@ -132,7 +134,12 @@ public class ListadoTiendaFragment extends Fragment  {
 		
 		//Recuperamos los datos
 		
-		GetData(FROM_FILE_JSON);
+		if (db.getTotalPlacesinDatabase()>0){
+			GetData(FROM_DATABASE);
+		}else{
+			GetData(FROM_FILE_JSON);
+		}
+		
 		
 	}
 
@@ -149,11 +156,19 @@ public class ListadoTiendaFragment extends Fragment  {
 		case FROM_PARSE_JSON:
 			loadJSONFromParseDotCom();
 			break;
+		case FROM_DATABASE:
+			loadFromDatabase();
+			break;
 		}
 		
 				
 	}
 
+	private void loadFromDatabase(){
+		tiendas=db.getShops();
+		
+	}
+	
 	private String loadJSONFromParseDotCom() {
 		
 		ParseQuery<ParseObject> query = ParseQuery.getQuery("Store");
@@ -171,6 +186,11 @@ public class ListadoTiendaFragment extends Fragment  {
 					Shop tienda = new Shop();
 					ParseObject parseTienda = (ParseObject)iterator.next();
 					
+					//Nuestro id será el siguiente al tamaño por ejemplo
+					
+					int idShop=db.getTotalPlacesinDatabase();
+					
+					tienda.setId(idShop);
 					tienda.setNombre(parseTienda.getString("name"));
 					tienda.setActividad(parseTienda.getString("activity"));
 					tienda.setTelefono(parseTienda.getString("phone"));
@@ -254,9 +274,13 @@ public class ListadoTiendaFragment extends Fragment  {
         	Gson gson = new Gson();
         	Shop tienda = gson.fromJson(json2, Shop.class);
         	tiendas.add(tienda);
-		}
-			
-        
+        	//Tarea 4, lo guardamos en la BD
+        	db.insertPlace(tienda);
+        	//Los
+		}		
 
     }
+	
+	
+
 }

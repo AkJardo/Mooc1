@@ -17,7 +17,7 @@ private int id;
 	private String url;
 	private String email;
 	
-	private ArrayList<Comment> comments;
+	private ArrayList<Comment> comments= new ArrayList<Comment>();
 	private Location location;
 	private int favorites;
 
