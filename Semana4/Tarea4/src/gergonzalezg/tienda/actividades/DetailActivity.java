@@ -41,9 +41,9 @@ public class DetailActivity extends FragmentActivity implements OnClickListener 
 		
 
 		comentariosFragment = (ComentariosFragment) getSupportFragmentManager().findFragmentById(R.id.fragmentComentarioDetalle);
-		comentariosFragment.loadComments(tienda.getComentarios());
+		//comentariosFragment.loadComments(tienda.getComentarios());
 		comentariosFragment.loadFavorites(tienda.getFavorites());
-		comentariosFragment.setNombreTienda(tienda.getNombre());
+		comentariosFragment.setTienda(tienda);
 		
 		btnLLamar=(Button) findViewById(R.id.button1);
 		btnLLamar.setBackgroundColor(getResources().getColor(R.color.callButton));

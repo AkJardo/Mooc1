@@ -2,6 +2,7 @@ package gergonzalezg.tienda.fragmentos;
 
 import es.gergonzalezg.tarea4.R;
 import gergonzalezg.tienda.actividades.MainActivity;
+import gergonzalezg.tienda.app.App;
 import gergonzalezg.tienda.clases.AdaptadorImagen;
 import gergonzalezg.tienda.clases.Photo;
 import gergonzalezg.tienda.fragmentos.DialogFotoSeleccionFragment.NoticeDialogListener;
@@ -57,7 +58,7 @@ implements NoticeDialogListener,Serializable{
 	private static final long serialVersionUID = 1L;
 	private static final int LOAD_IMAGE=1;
 	private static final int TAKE_PHOTO=2;
-
+	private gergonzalezg.tienda.data.DBAdapter db; 
 	AdaptadorImagen adapter;
 	ArrayList<Photo> imagesArray;
 	ImageButton btnFoto;
@@ -66,6 +67,13 @@ implements NoticeDialogListener,Serializable{
 
 	
 	
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		db=((App)getActivity().getApplicationContext()).getDB();
+		imagesArray = ((App)getActivity().getApplicationContext()).getImagesArray();
+	}
+
 	@Override
 	public void onSaveInstanceState(Bundle outState) {
 		
@@ -84,7 +92,8 @@ implements NoticeDialogListener,Serializable{
 			photoPath=savedInstanceState.getString("rutafoto");
 		}
 		
-		imagesArray = new ArrayList<Photo>();
+		
+		
 		adapter = new AdaptadorImagen(getActivity(), imagesArray);
 
 
@@ -118,7 +127,16 @@ implements NoticeDialogListener,Serializable{
 
 		listView.setAdapter(adapter);	
 
-		APICall();
+		
+		//Si no hay fotos guardadas en DB las cargamos mediante el API de instagram la primera vez
+		//En otro caso recuperamos las de la DB
+		if (db.getTotalPhotosinDatabase()>0){
+			imagesArray=(ArrayList<Photo>) db.getPhotos();
+			adapter.notifyDataSetChanged();
+		}else{
+			APICall();
+		}
+		
 	}
 
 	@Override
@@ -166,7 +184,9 @@ implements NoticeDialogListener,Serializable{
 							image.setUsuario(userName);
 
 							imagesArray.add(image);
-
+							int idPhoto = db.getTotalPhotosinDatabase();
+							image.setId(idPhoto);
+							db.insertPhoto(image);
 						}
 					}	
 					adapter.notifyDataSetChanged();
@@ -212,6 +232,9 @@ implements NoticeDialogListener,Serializable{
 		newPhoto.setDescripcion("Descripción imagen: " + timeStamp);
 
 		imagesArray.add(0,newPhoto);
+		int idPhoto = db.getTotalPhotosinDatabase();
+		newPhoto.setId(idPhoto);
+		db.insertPhoto(newPhoto);
 		
 		newPhoto.enviarParse().saveInBackground(new SaveCallback() {
 			
@@ -263,6 +286,10 @@ implements NoticeDialogListener,Serializable{
 			newPhoto.setDescripcion("Descripción imagen: " + timeStamp);
 
 			imagesArray.add(0,newPhoto);
+			int idPhoto = db.getTotalPhotosinDatabase();
+			newPhoto.setId(idPhoto);
+			db.insertPhoto(newPhoto);
+			
 			newPhoto.enviarParse().saveInBackground(new SaveCallback() {
 				
 				@Override

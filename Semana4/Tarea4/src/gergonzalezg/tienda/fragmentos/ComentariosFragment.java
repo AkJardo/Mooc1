@@ -1,7 +1,9 @@
 package gergonzalezg.tienda.fragmentos;
 
 import es.gergonzalezg.tarea4.R;
+import gergonzalezg.tienda.app.App;
 import gergonzalezg.tienda.clases.Comment;
+import gergonzalezg.tienda.clases.Shop;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,6 +12,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -18,10 +22,13 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemLongClickListener;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.ScrollView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.parse.FindCallback;
@@ -35,20 +42,34 @@ public class ComentariosFragment extends Fragment implements OnClickListener {
 	ImageButton botonFavorito;
 	TextView txtFavorito;
 	ImageButton botonAdd;
-	TextView txtComentarios;
+	ListView lstComentarios;
 	EditText nuevoComentario;
-	ScrollView scvComentarios;
-	private String nombreTienda="";
+
+	private Shop tienda;
 	private int favoritos;
 	private boolean checkAsFavorite=false;
 	private ArrayList<Comment> comentarios = new ArrayList<Comment>();
+	private gergonzalezg.tienda.data.DBAdapter db; 
+	private AdaptadorComentarios adapter;
 	
+	
+	
+	
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		db=((App)getActivity().getApplicationContext()).getDB();
+		
+	}
+
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onActivityCreated(savedInstanceState);
-		
-		
+		//cargamos los comentarios
+		adapter=new AdaptadorComentarios(getActivity(), R.layout.fragment_comentarios, tienda.getComentarios());
+		lstComentarios.setAdapter(adapter);
+		loadComments(tienda.getComentarios());
 	}
 
 	@Override
@@ -60,11 +81,25 @@ public class ComentariosFragment extends Fragment implements OnClickListener {
 		//LinearLayout favoritos = (LinearLayout) vista.findViewById(R.id.layoutFavorito);
 		botonFavorito= (ImageButton) vista.findViewById(R.id.btnFavorito);
 		txtFavorito= (TextView) vista.findViewById(R.id.txtFavorito);
-		scvComentarios=(ScrollView) vista.findViewById(R.id.scvComentarios);
-		txtComentarios= (TextView) scvComentarios.findViewById(R.id.txtComentarios);
-		nuevoComentario= (EditText) vista.findViewById(R.id.editComentario);
+		
+		lstComentarios= (ListView) vista.findViewById(R.id.lstComentarios);
+		lstComentarios.setOnItemLongClickListener(new OnItemLongClickListener() {
+
+			@Override
+			public boolean onItemLongClick(AdapterView<?> adaptador, View vista,
+					int posicion, long arg3) {
 				
-		txtComentarios.setText("");
+				deleteComentario((Comment) (adaptador.getItemAtPosition(posicion)));
+				return false;
+			}
+			
+		});
+			
+		
+		nuevoComentario= (EditText) vista.findViewById(R.id.editComentario);
+		
+		
+		
 		txtFavorito.setText(String.valueOf(favoritos));
 		botonAdd.setOnClickListener(this);
 		botonFavorito.setOnTouchListener(new OnTouchListener() {
@@ -93,9 +128,11 @@ public class ComentariosFragment extends Fragment implements OnClickListener {
 		if (!(nuevoComentario.getText().toString() == "")){
 			Comment newComment = new Comment();
 			newComment.setComentario(nuevoComentario.getText().toString());
-			this.comentarios.add(newComment);
+			this.comentarios.add(0, newComment);
+			tienda.getComentarios().add(0, newComment);
 			writeComment(newComment);
 			updateComentarios();
+			saveComment(newComment);
 		}
 	}
 	
@@ -118,7 +155,7 @@ public class ComentariosFragment extends Fragment implements OnClickListener {
 	private void updateFavorites(){
 		
 		ParseQuery<ParseObject> query = ParseQuery.getQuery("Store");
-		query.whereEqualTo("name", nombreTienda);
+		query.whereEqualTo("name", tienda.getNombre());
 		query.findInBackground(new FindCallback<ParseObject>() {
 		    public void done(List<ParseObject> scoreList, ParseException e) {
 		       
@@ -128,12 +165,23 @@ public class ComentariosFragment extends Fragment implements OnClickListener {
 		        
 		    }
 		});
+		
+		//Actualizamos los favoritos en la DB
+		tienda.setFavorites(ComentariosFragment.this.favoritos);
+		db.updateShop(tienda);
 	}
+	
+private void deleteComentario(Comment comentario){
+	comentarios.remove(comentario);
+	tienda.getComentarios().remove(comentario);
+	db.deleteComment(comentario);
+	adapter.notifyDataSetChanged();
+}
 	
 private void updateComentarios(){
 		
 		ParseQuery<ParseObject> query = ParseQuery.getQuery("Store");
-		query.whereEqualTo("name", nombreTienda);
+		query.whereEqualTo("name", tienda.getNombre());
 		query.findInBackground(new FindCallback<ParseObject>() {
 		    public void done(List<ParseObject> scoreList, ParseException e) {
 		       
@@ -158,13 +206,23 @@ private void updateComentarios(){
 		        scoreList.get(0).put("comments", listaComentarios);	
 		        scoreList.get(0).saveInBackground();
 		        
+		        
 		    }
 		});
 	}
 	
 	private void writeComment(Comment comentario){
 		
-		txtComentarios.setText(txtComentarios.getText().toString() + "- " + comentario.getComentario().toString() + '\n');
+		//(txtComentarios.setText(txtComentarios.getText().toString() + "- " + comentario.getComentario().toString() + '\n');
+		adapter.notifyDataSetChanged();
+			
+	}
+	
+	private void saveComment(Comment comentario){
+		int idComment=db.getTotalCommentsStoreinDatabase();
+		comentario.setId(idComment);
+		comentario.setIdShop(tienda.getId());
+		db.insertComment(comentario, tienda.getId());
 	}
 	
 	public void loadComments(ArrayList<Comment> comentarios){
@@ -183,13 +241,42 @@ private void updateComentarios(){
 		txtFavorito.setText(String.valueOf(favoritos));	
 	}
 
-	public String getNombreTienda() {
-		return nombreTienda;
+	public Shop getTienda() {
+		return tienda;
 	}
 
-	public void setNombreTienda(String nombreTienda) {
-		this.nombreTienda = nombreTienda;
+	public void setTienda(Shop tienda) {
+		this.tienda = tienda;
 	}
 	
+	
+	public class AdaptadorComentarios extends ArrayAdapter<Comment>{
+
+		Context contexto;
+		List<Comment> comentarios;
+		
+		public AdaptadorComentarios(Context context, int resource,
+				List<Comment> objects) {
+			super(context, resource, objects);
+			
+			this.contexto=context;
+			this.comentarios=objects;
+		}
+		@Override
+		public View getView(int position, View convertView, ViewGroup parent) {
+			
+			LayoutInflater inflater = ((Activity) contexto).getLayoutInflater();
+			
+			View lista=inflater.inflate(android.R.layout.simple_list_item_1, null);
+			
+			TextView textoComentario= (TextView) lista.findViewById(android.R.id.text1);
+						
+			textoComentario.setText(comentarios.get(position).getComentario().toString());
+			
+			
+			return lista;
+		}
+		
+	}
 
 }

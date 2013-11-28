@@ -19,7 +19,7 @@ public class DBAdapter {
 	
 	 private DBHelper dbHelper;
 	 private static final String DATABASE_NAME = "places.db";
-	 private static final int DATABASE_VERSION = 3;
+	 private static final int DATABASE_VERSION = 7;
 	 private Context context;
 	  
      public DBAdapter (Context context){
@@ -29,15 +29,46 @@ public class DBAdapter {
      
      public void insertPlace(Shop p){    	 
     	 ContentValues values = buildContentValuesFromShop(p);
+    	 
          SQLiteDatabase db = dbHelper.getWritableDatabase();
          try{
         	 db.insertWithOnConflict(DBHelper.SHOPS_TABLE, null, values, SQLiteDatabase.CONFLICT_IGNORE);                 
+        	 
+        	 List<Comment> comentarios = p.getComentarios();
+        	 for(int i = 0; i < comentarios.size(); i++){
+        		 comentarios.get(i).setId(getTotalCommentsStoreinDatabase());
+        		 ContentValues valuesComment  = buildContentValuesFromComment(comentarios.get(i), p.getId());
+        		 db.insertWithOnConflict(DBHelper.COMMENTS_TABLE, null, valuesComment, SQLiteDatabase.CONFLICT_IGNORE);
+        	 }
+        	 
+        	 
          } finally {
         	 db.close();
          }
      }
      
-     public int getTotalPlacesinDatabase() {
+     public void updateShop(Shop p){    	 
+    	 ContentValues values = buildContentValuesFromShop(p);
+    	 
+         SQLiteDatabase db = dbHelper.getWritableDatabase();
+         try{
+        	 db.updateWithOnConflict(DBHelper.SHOPS_TABLE, values, DBHelper.KEY_SHOP_ID + "=?",new String[]{p.getId()+""}, SQLiteDatabase.CONFLICT_IGNORE);                        	        	 
+        	 
+         } finally {
+        	 db.close();
+         }
+     }
+     
+     public int getTotalCommentsStoreinDatabase() {
+    	
+    	 SQLiteDatabase db = dbHelper.getReadableDatabase();
+    	 Cursor cursor = db.query(DBHelper.COMMENTS_TABLE, null, null, null, null, null, null);
+    	 int total = cursor.getCount();
+    	 cursor.close();
+    	 return total;
+	}
+
+	public int getTotalPlacesinDatabase() {
     	 SQLiteDatabase db = dbHelper.getReadableDatabase();
     	 Cursor cursor = db.query(DBHelper.SHOPS_TABLE, null, null, null, null, null, null);
     	 int total = cursor.getCount();
@@ -70,8 +101,11 @@ public class DBAdapter {
     		 localizacion.setLatitude(cursor.getFloat(cursor.getColumnIndex(DBHelper.KEY_SHOP_LATITUDE)));
     		 localizacion.setLongitude(cursor.getFloat(cursor.getColumnIndex(DBHelper.KEY_SHOP_LONGITUDE)));
 
+    		 ArrayList<Comment>comentarios=new ArrayList<Comment>();
+    		 
+    		 comentarios=(ArrayList<Comment>) getComments(cursor.getInt(cursor.getColumnIndex(DBHelper.KEY_SHOP_ID)));
 
-
+    		 tienda.setComentarios(comentarios);
     		 tienda.setLocalizacion(localizacion);
 
     		 tiendas.add(tienda);
@@ -91,7 +125,7 @@ public class DBAdapter {
     	 values.put(DBHelper.KEY_SHOP_HOURS, p.getHorario());
     	 values.put(DBHelper.KEY_SHOP_URL, p.getWeb());
     	 values.put(DBHelper.KEY_SHOP_EMAIL, p.getEmail());
-    	 values.put(DBHelper.KEY_SHOP_FAVORITES, p.getId());
+    	 values.put(DBHelper.KEY_SHOP_FAVORITES, p.getFavorites());
     	 values.put(DBHelper.KEY_SHOP_LATITUDE, p.getLocalizacion().getLatitude());
     	 values.put(DBHelper.KEY_SHOP_LONGITUDE, p.getLocalizacion().getLongitude());
     	 return values;
@@ -129,7 +163,7 @@ public class DBAdapter {
 
      public List<Photo> getPhotos() {
 
-    	 List<Photo> photos = new ArrayList<Photo>();
+    	 List<Photo> photos = ((App)context.getApplicationContext()).getImagesArray();
 
     	 SQLiteDatabase db = dbHelper.getReadableDatabase();
     	 Cursor cursor = db.query(DBHelper.PHOTOS_TABLE, null, null, null, null, null, null);
@@ -164,10 +198,20 @@ public class DBAdapter {
          }
      }
      
+     public void deleteComment(Comment p){    
+    	
+         SQLiteDatabase db = dbHelper.getWritableDatabase();
+         try{
+        	 db.delete(DBHelper.COMMENTS_TABLE, DBHelper.KEY_COMMENT_ID + "=?", new String[]{p.getId()+""});                 
+         } finally {
+        	 db.close();
+         }
+     }
+     
      public ContentValues buildContentValuesFromComment (Comment p, int idShop) {
     	 ContentValues values = new ContentValues();
     	 values.put(DBHelper.KEY_COMMENT_ID, p.getId());
-    	 values.put(DBHelper.KEY_COMMENT_ID_STORE, p.getIdShop());
+    	 values.put(DBHelper.KEY_COMMENT_ID_STORE, idShop);
     	 values.put(DBHelper.KEY_COMMENT_COMMENT, p.getComentario());
     	 
     	 
@@ -185,11 +229,11 @@ public class DBAdapter {
     	 return total;
      }
 
-     public List<Comment> getComments(integer idStore) {
+     public List<Comment> getComments(int idStore) {
 
     	 List<Comment> comments = new ArrayList<Comment>();
     	 String whereClause = "idStore =?";
-    	 String[] whereArgs = new String[]{idStore.toString()};
+    	 String[] whereArgs = new String[]{idStore + ""};
     	 
     	 SQLiteDatabase db = dbHelper.getReadableDatabase();
     	 Cursor cursor = db.query(DBHelper.COMMENTS_TABLE, null, whereClause, whereArgs, null, null, null);

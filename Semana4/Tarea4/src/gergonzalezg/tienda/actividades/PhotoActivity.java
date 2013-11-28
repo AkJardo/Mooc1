@@ -22,10 +22,10 @@ public class PhotoActivity extends FragmentActivity {
 		
 		tienda=(Shop) getIntent().getSerializableExtra("tienda");
 		
-		comentariosFragment = (ComentariosFragment) getSupportFragmentManager().findFragmentById(R.id.fragmentComentarioDetalle);
-		comentariosFragment.loadComments(tienda.getComentarios());
+		comentariosFragment = (ComentariosFragment) getSupportFragmentManager().findFragmentById(R.id.fragmentComentarioFoto);
+		comentariosFragment.setTienda(tienda);
 		comentariosFragment.loadFavorites(tienda.getFavorites());
-		comentariosFragment.setNombreTienda(tienda.getNombre());
+		
 		
 		getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
 	}

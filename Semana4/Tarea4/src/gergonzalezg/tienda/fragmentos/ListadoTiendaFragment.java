@@ -253,8 +253,7 @@ public class ListadoTiendaFragment extends Fragment  {
 
             json = new String(buffer, "UTF-8");
 
-            
-            
+                        
 
         } catch (IOException ex) {
         	ex.printStackTrace();
@@ -274,9 +273,11 @@ public class ListadoTiendaFragment extends Fragment  {
         	Gson gson = new Gson();
         	Shop tienda = gson.fromJson(json2, Shop.class);
         	tiendas.add(tienda);
-        	//Tarea 4, lo guardamos en la BD
+        	//Tarea 4, lo guardamos en la BD junto con los comentarios
+        	int idShop=db.getTotalPlacesinDatabase();
+			tienda.setId(idShop+1);
         	db.insertPlace(tienda);
-        	//Los
+        	
 		}		
 
     }

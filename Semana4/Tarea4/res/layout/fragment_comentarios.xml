@@ -12,22 +12,18 @@
         android:src="@drawable/ic_action_unread"
         android:contentDescription="@string/btnComentario" />
 
-    <ScrollView 
-        android:id="@+id/scvComentarios"
-        android:layout_width="wrap_content"
-        android:layout_height="56dp"  
-        android:layout_toLeftOf="@+id/layoutFavorito"
-        android:layout_toRightOf="@+id/icoComentario"
-        android:layout_alignTop="@+id/icoComentario"
-        android:layout_marginLeft="10dp"> 
+   
         
-	        <TextView
-	        android:id="@+id/txtComentarios"
-	        android:layout_width="wrap_content"
-        	android:layout_height="56dp"  
-	        android:text="@string/txtComentarios" />
-	        
-   </ScrollView>
+        <ListView
+            android:id="@+id/lstComentarios"
+            android:layout_width="wrap_content"
+            android:layout_height="56dp"
+            android:layout_alignTop="@+id/icoComentario"
+            android:layout_marginLeft="10dp"
+            android:layout_toLeftOf="@+id/layoutFavorito"
+            android:layout_toRightOf="@+id/icoComentario"
+            android:fadeScrollbars="false" />
+
    
 
     <EditText
@@ -35,7 +31,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/scvComentarios"
+        android:layout_below="@+id/lstComentarios"
         android:layout_marginLeft="26dp"
         android:layout_marginRight="26dp"
         android:ems="10"

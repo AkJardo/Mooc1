@@ -59,7 +59,7 @@ public class DBHelper extends SQLiteOpenHelper {
 	private final static String DATABASE_CREATE_COMMENTS = "CREATE TABLE " + COMMENTS_TABLE + 
 			  "(" + KEY_COMMENT_ID + " integer primary key autoincrement, " +
 			  KEY_COMMENT_ID_STORE + " integer, " + 	 
-			  COMMENTS_TABLE + " text)";
+			  KEY_COMMENT_COMMENT + " text)";
 	
 	
 
